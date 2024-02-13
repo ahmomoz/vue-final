@@ -1,0 +1,1 @@
+import{_ as e,c as s,o,a as t}from"./index-Zg-dMfv0.js";const c={},a={class:"home"},_=t("h3",{class:"mt-3"},"您現在在前台首頁",-1),n=[_];function r(d,i,p,m,f,h){return o(),s("div",a,n)}const u=e(c,[["render",r]]);export{u as default};
