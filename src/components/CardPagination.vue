@@ -7,7 +7,7 @@
             </a>
             </li>
             <li class="page-item" v-for="page in pagination.total_pages" :key="page">
-            <a class="page-link" href="#" @click.prevent="getProductsList(page)">{{page}}</a>
+            <a class="page-link" :class="{'active':pagination.current_page === page}" href="#" @click.prevent="getProductsList(page)">{{page}}</a>
             </li>
             <li class="page-item" :class="{'disabled':pagination.current_page === pagination.total_pages
         }">
