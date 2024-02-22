@@ -1,6 +1,6 @@
 <template>
-  <header class="navbar navbar-dark sticky-top bg-dark flex-wrap flex-md-nowrap shadow">
-    <RouterLink to="/admin" class="navbar-brand col-md-3 col-lg-2 me-0 px-3">療遇 - 後台</RouterLink>
+  <header class="navbar navbar-dark sticky-top flex-wrap flex-md-nowrap shadow bg-primary">
+    <RouterLink to="/admin" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 ">療遇 - 後台</RouterLink>
     <button class="navbar-toggler d-md-none me-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -17,7 +17,7 @@
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink to="/admin/order" class="nav-link">
+            <RouterLink to="/admin/orders" class="nav-link">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 2 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-1 feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
               訂單列表
             </RouterLink>

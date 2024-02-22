@@ -40,7 +40,7 @@
                 </draggable>
               </div>
 
-              <button class="btn btn-outline-danger btn-sm d-block w-100 mb-2"
+              <button class="btn btn-outline-primary btn-sm d-block w-100 mb-2"
                 @click="deleteAllImg">
                   刪除所有圖片
                 </button>

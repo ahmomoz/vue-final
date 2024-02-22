@@ -98,7 +98,8 @@ export default {
           email: '',
           name: '',
           tel: '',
-          address: ''
+          address: '',
+          date: ''
         },
         message: ''
       },
@@ -194,6 +195,9 @@ export default {
     },
     addOrder () { // 送出訂單
       if (this.cartList.length > 0) {
+        const currentTime = new Date()
+        const currentTimeString = currentTime.toISOString()
+        this.form.user.date = currentTimeString
         const item = this.form
         this.isLoading = true
         this.$axios.post(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/order`, { data: item })

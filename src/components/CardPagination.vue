@@ -2,16 +2,21 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item" :class="{'disabled':pagination.current_page === 1}">
-            <a class="page-link" href="#" aria-label="Previous" @click.prevent="getProductsList(pagination.current_page-1)">
+            <a class="page-link" href="#" aria-label="Previous"
+            @click.prevent="getList(pagination.current_page-1)">
                 <span aria-hidden="true">&laquo;</span>
             </a>
             </li>
             <li class="page-item" v-for="page in pagination.total_pages" :key="page">
-            <a class="page-link" :class="{'active':pagination.current_page === page}" href="#" @click.prevent="getProductsList(page)">{{page}}</a>
+            <a class="page-link" :class="{'active':pagination.current_page === page}" href="#"
+            @click.prevent="getList(page)">
+            {{page}}
+            </a>
             </li>
             <li class="page-item" :class="{'disabled':pagination.current_page === pagination.total_pages
         }">
-            <a class="page-link" href="#" aria-label="Next" @click.prevent="getProductsList(pagination.current_page+1)">
+            <a class="page-link" href="#" aria-label="Next"
+            @click.prevent="getList(pagination.current_page+1)">
                 <span aria-hidden="true">&raquo;</span>
             </a>
             </li>
@@ -23,8 +28,8 @@
 export default {
   props: ['pagination'],
   methods: {
-    getProductsList (pageNum) {
-      this.$emit('emit-getproductslist', pageNum)
+    getList (pageNum) {
+      this.$emit('emit-getlist', pageNum)
     }
   }
 }

@@ -17,11 +17,11 @@
     <div class="card my-1 my-lg-4 shadow-sm">
       <div class="card-header">
         <div class="text-end">
-            <button type="button" class="btn btn-info text-white mx-3"
+            <button type="button" class="btn btn-primary text-white mx-3"
             @click="ascending=!ascending">
             {{ascending?"降冪":"升冪"}}排序
             </button>
-            <router-link class="btn btn-primary"
+            <router-link class="btn btn-primary text-light"
                   :to="'product/add'">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="4 4 12 12"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
                   建立新的產品
@@ -32,8 +32,8 @@
         <table class="table table-hover">
             <thead class="bg-light">
             <tr class="align-middle">
-                <th>地區</th>
                 <th>分類</th>
+                <th>地區</th>
                 <th>產品名稱</th>
                 <th @click="sortBy='price'">
                   售價
@@ -47,13 +47,13 @@
             <tbody v-if="sortBy==='default'">
             <loading v-if="isLoading" :active="isLoading" :can-cancel="false"/>
             <tr v-for="product in products" :key="product.id">
-                <td> {{ product.nation }} </td>
                 <td> {{ product.category }} </td>
+                <td> {{ product.nation }} </td>
                 <td> {{ product.title }} </td>
                 <td> NT${{ product.price }} <br>
                 <del style="color: rgb(196, 196, 196);"> NT${{ product.origin_price }} </del></td>
                 <td>
-                <span class="text-success" v-if="product.is_enabled">上架中</span>
+                <span class="text-primary" v-if="product.is_enabled">上架中</span>
                 <span v-else>未上架</span>
                 </td>
                 <td>
@@ -70,8 +70,8 @@
             <!--sort-->
             <tbody v-else>
             <tr v-for="product in sortProducts" :key="product.name">
-              <td> {{ product.nation }} </td>
                 <td> {{ product.category }} </td>
+                <td> {{ product.nation }} </td>
                 <td> {{ product.title }} </td>
                 <td> NT${{ product.price }} <br>
                 <del style="color: rgb(196, 196, 196);"> NT${{ product.origin_price }} </del></td>
@@ -92,8 +92,8 @@
             </tbody>
         </table>
       </div>
-      <div class="card-footer">
-        <card-pagination :pagination="pagination" @emit-getproductslist="getProductsList"></card-pagination>
+      <div class="card-footer d-flex justify-content-center">
+        <card-pagination :pagination="pagination" @emit-getlist="getProductsList"></card-pagination>
       </div>
     </div>
   </div>
@@ -111,17 +111,9 @@ export default {
       ascending: true,
       allProducts: [],
       products: [],
-      productsDetail: {},
-      tempProduct: {
-        imagesUrl: []
-      },
       searchInput: '', // 初始化搜尋框輸入字串
       pagination: {},
-      isLoading: true, // Loading效果
-      modal: {
-        productModal: '',
-        delProductModal: ''
-      }
+      isLoading: true // Loading效果
     }
   },
   methods: {
@@ -147,8 +139,8 @@ export default {
         text: `確定要刪除「${title}」嗎？`,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
+        confirmButtonColor: '#eb5a68',
+        cancelButtonColor: '#8bafd7',
         confirmButtonText: '確定刪除',
         cancelButtonText: '取消'
       }).then((result) => {
@@ -172,12 +164,6 @@ export default {
     },
     productSearch () {
       this.products = this.productsFilteredResults
-    }
-  },
-  watch: {
-    searchInput (newVal, oldVal) {
-    // 當搜尋輸入值發生變化時觸發
-      this.productSearch()
     }
   },
   computed: {

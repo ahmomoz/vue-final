@@ -52,9 +52,15 @@ const routes = [
         component: () => import('@/views/admin/AdminProductAddView.vue')
       },
       {
-        path: 'order',
+        path: 'orders',
         name: '後台訂單列表',
-        component: () => import('@/views/admin/AdminOrderView.vue')
+        component: () => import('@/views/admin/AdminOrdersView.vue')
+      },
+      {
+        path: 'order/:id',
+        name: '訂單詳細頁面',
+        component: () => import('@/views/admin/AdminOrderView.vue'),
+        props: true
       }
     ]
   }
