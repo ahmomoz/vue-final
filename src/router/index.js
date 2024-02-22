@@ -42,6 +42,16 @@ const routes = [
         component: () => import('@/views/admin/AdminProductsView.vue')
       },
       {
+        path: 'product/edit/:id',
+        name: '後台產品單一編輯頁面',
+        component: () => import('@/views/admin/AdminProductEditView.vue')
+      },
+      {
+        path: 'product/add',
+        name: '後台產品新增頁面',
+        component: () => import('@/views/admin/AdminProductAddView.vue')
+      },
+      {
         path: 'order',
         name: '後台訂單列表',
         component: () => import('@/views/admin/AdminOrderView.vue')

@@ -16,12 +16,15 @@
                 <loading v-model:active="isLoading"/>
                 <tr v-for="product in products" :key="product.id">
                     <td><img
-                    :src="product.imageUrl"
+                    :src="product.imagesUrl[0]"
                     class="card-img-top img-fluid"
                     alt="product.title"
                     /></td>
                     <td>
-                        <RouterLink :to="'/product/' + product.id" class="nav-link">{{ product.title }}</RouterLink>
+                        <RouterLink
+                        class="nav-link" :to="'/product/' + product.id">
+                        {{ product.title }}
+                      </RouterLink>
                     </td>
                     <td><del>$ {{ product.origin_price }}</del></td>
                     <td>$ {{ product.price }}</td>
