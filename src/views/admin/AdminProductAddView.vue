@@ -14,10 +14,11 @@
                 <input type="file" id="file" placeholder="請輸入圖片連結" @change="imgUpload($event)">
               </div>
               <!--圖片拖曳區塊-->
-              <div class="border-dashed-blue px-2 mb-3">
-                <div class="py-5" v-if="!product.imagesUrl[0]">請上傳圖片</div>
+              <div class="border-dashed-blue mb-3">
+                <p class="m-0 text-primary px-2">*第一張圖為商品主圖</p>
+                <div class="py-5 bg-light" v-if="!product.imagesUrl[0]"><p class="px-2">請上傳圖片</p></div>
                 <draggable
-                class="row"
+                class="row px-2"
                 v-model="product.imagesUrl"
                 group="images"
                 itemKey="index"

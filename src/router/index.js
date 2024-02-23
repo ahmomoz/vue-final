@@ -61,6 +61,22 @@ const routes = [
         name: '訂單詳細頁面',
         component: () => import('@/views/admin/AdminOrderView.vue'),
         props: true
+      },
+      {
+        path: 'coupons',
+        name: '優惠券頁面',
+        component: () => import('@/views/admin/AdminCouponsView.vue')
+      },
+      {
+        path: 'coupon/edit/:id',
+        name: '優惠券單一編輯頁面',
+        component: () => import('@/views/admin/AdminCouponEditView.vue'),
+        props: true
+      },
+      {
+        path: 'coupon/add',
+        name: '優惠券新增頁面',
+        component: () => import('@/views/admin/AdminCouponAddView.vue')
       }
     ]
   }
