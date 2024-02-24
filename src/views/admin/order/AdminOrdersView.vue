@@ -5,10 +5,17 @@
           <div class="container-fluid">
             <form class="row g-2 align-items-center">
               <div class="col-auto">
-                <input class="form-control" type="search" placeholder="搜尋訂單編號" aria-label="Search" v-model="searchInput">
+                <input
+                  class="form-control"
+                  type="search"
+                  placeholder="搜尋訂單編號"
+                  aria-label="Search"
+                  v-model="searchInput">
               </div>
               <div class="col-auto">
-                <button class="btn btn-outline-primary" type="submit" @click="orderSearch">搜尋</button>
+                <button class="btn btn-outline-primary" type="button"
+                  @click="orderSearch">搜尋
+                </button>
               </div>
             </form>
           </div>
@@ -16,10 +23,10 @@
       </div>
       <div class="card my-1 my-lg-4 shadow-sm">
         <div class="card-header">
-          <div class="text-end">
+          <div class="text-end py-2">
               <button type="button" class="btn btn-primary text-white"
-              @click="ascending=!ascending">
-              {{ascending?"降冪":"升冪"}}排序
+                @click="ascending=!ascending">
+                {{ascending?"降冪":"升冪"}}排序
               </button>
           </div>
         </div>
@@ -28,12 +35,12 @@
               <thead class="bg-light">
               <tr class="align-middle">
                   <th @click="sortBy='create_at'">訂單編號
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up ms-1" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/></svg></th>
+                    <span class="bi bi-arrow-down-up ms-1"></span></th>
                   <th>訂購者</th>
                   <th>訂購商品</th>
                   <th @click="sortBy='total'">
                     金額
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up ms-1" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/></svg></th>
+                    <span class="bi bi-arrow-down-up ms-1"></span></th>
                   <th>狀態</th>
                   <th>訂單成立時間</th>
                   <th>操作</th>
@@ -59,13 +66,16 @@
                   <td>
                   <div class="btn-group">
                     <router-link class="btn btn-outline-primary btn-sm"
-                    :to="{ name: '訂單詳細頁面',
-                    params: { id: order.id }, query: { currentPage: pagination.current_page } }">詳細</router-link>
-                    <button type="button" class="btn btn-outline-danger btn-sm" @click="deleteOrder(order.create_at,order.id)">
+                      :to="{ name: '訂單詳細頁面',
+                      params: { id: order.id }, query: { currentPage: pagination.current_page } }">
+                      詳細
+                    </router-link>
+                    <button type="button" class="btn btn-outline-danger btn-sm"
+                      @click="deleteOrder(order.create_at,order.id)">
                       刪除
                     </button>
                   </div>
-                  </td>
+                </td>
               </tr>
               </tbody>
               <!--sort-->
@@ -88,8 +98,11 @@
                   <div class="btn-group">
                     <router-link class="btn btn-outline-primary btn-sm"
                     :to="{ name: '訂單詳細頁面',
-                    params: { id: order.id }, query: { currentPage: pagination.current_page } }">詳細</router-link>
-                    <button type="button" class="btn btn-outline-danger btn-sm" @click="deleteOrder(order.create_at,order.id)">
+                    params: { id: order.id }, query: { currentPage: pagination.current_page } }">
+                    詳細
+                  </router-link>
+                    <button type="button" class="btn btn-outline-danger btn-sm"
+                      @click="deleteOrder(order.create_at,order.id)">
                       刪除
                     </button>
                   </div>
@@ -110,6 +123,7 @@ import CardPagination from '@/components/CardPagination.vue' // 分頁元件
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 import moment from 'moment' // 日期轉換套件
+const { VITE_API_URL, VITE_APIPATH } = import.meta.env
 
 export default {
   data () {
@@ -126,7 +140,7 @@ export default {
   methods: {
     getOrderList (page = 1) { // 取得訂單資料
       this.isLoading = true
-      this.$axios.get(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/orders?page=${page}`)
+      this.$axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/orders?page=${page}`)
         .then(res => {
           const { orders, pagination } = res.data
           this.allOrders = orders
@@ -155,11 +169,14 @@ export default {
         cancelButtonText: '取消'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$axios.delete(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/order/${id}`)
+          this.$axios.delete(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/order/${id}`)
             .then(_res => {
               this.$Swal.fire({
+                position: 'top-end',
+                icon: 'success',
                 title: '已刪除',
-                icon: 'success'
+                showConfirmButton: false,
+                timer: 700
               })
               this.getOrderList() // 重新取得訂單列表
             })

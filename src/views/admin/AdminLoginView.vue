@@ -48,7 +48,7 @@ export default {
             const { token, expired } = res.data
             document.cookie = `hexToken = ${token}; expires=${new Date(expired)};`
             this.$Swal.fire('登入成功')
-            this.$router.push('/admin')
+            this.$router.push('/dashboard/home')
           })
           .catch(() => {
             this.$Swal.fire('請檢查帳號密碼是否有誤')

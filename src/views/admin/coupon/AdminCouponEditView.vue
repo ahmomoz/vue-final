@@ -33,7 +33,7 @@
 
             <div class="mb-3">
               <label for="content" class="form-label">備註(選填)</label>
-              <textarea id="description" type="text" class="form-control"
+              <textarea id="content" type="text" class="form-control"
               placeholder="請輸入備註"
               v-model="coupon.content">
               </textarea>
@@ -55,7 +55,7 @@
         <button type="button" class="btn btn-outline-secondary mx-2" @click="goBack">
         取消
         </button>
-        <button type="button" class="btn btn-primary" @click="addCoupon">
+        <button type="button" class="btn btn-primary text-light" @click="addCoupon">
         更新
         </button>
       </div>
@@ -65,6 +65,7 @@
 <script>
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
+const { VITE_API_URL, VITE_APIPATH } = import.meta.env
 
 export default {
   props: ['id'],
@@ -80,7 +81,7 @@ export default {
     getCouponList (currentPage) { // 取得優惠券資料
       this.isLoading = true
       const { id } = this.$route.params
-      this.$axios.get(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/coupons?page=${currentPage}`)
+      this.$axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/coupons?page=${currentPage}`)
         .then(res => {
           const coupons = res.data.coupons
           this.coupon = coupons.find(coupon => coupon.id.toLowerCase().includes(id.toLowerCase()))
@@ -101,14 +102,17 @@ export default {
       this.coupon.due_date = currentTimeInSeconds
       const item = this.coupon
       this.isLoading = true
-      this.$axios.put(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/coupon/${this.coupon.id}`, { data: item })
+      this.$axios.put(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/coupon/${this.coupon.id}`, { data: item })
         .then(res => {
           this.isLoading = false
           this.$Swal.fire({
+            position: 'top-end',
             icon: 'success',
-            title: '更新成功'
+            title: '更新成功',
+            showConfirmButton: false,
+            timer: 700
           })
-          this.$router.push('/admin/conpons')
+          this.$router.push('/dashboard/coupons')
         })
         .catch(err => {
           this.isLoading = false

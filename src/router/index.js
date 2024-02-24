@@ -32,53 +32,78 @@ const routes = [
     component: () => import('@/views/admin/AdminLoginView.vue')
   },
   {
-    path: '/admin',
+    path: '/dashboard',
     name: 'Admin',
     component: () => import('@/views/admin/AdminView.vue'),
     children: [
       {
+        path: 'home',
+        name: '後台主頁',
+        component: () => import('@/views/admin/AdminHomeView.vue')
+      },
+      {
         path: 'products',
         name: '後台產品列表',
-        component: () => import('@/views/admin/AdminProductsView.vue')
+        component: () => import('@/views/admin/product/AdminProductsView.vue')
       },
       {
         path: 'product/edit/:id',
         name: '後台產品單一編輯頁面',
-        component: () => import('@/views/admin/AdminProductEditView.vue')
+        component: () => import('@/views/admin/product/AdminProductEditView.vue')
       },
       {
         path: 'product/add',
         name: '後台產品新增頁面',
-        component: () => import('@/views/admin/AdminProductAddView.vue')
+        component: () => import('@/views/admin/product/AdminProductAddView.vue')
       },
       {
         path: 'orders',
         name: '後台訂單列表',
-        component: () => import('@/views/admin/AdminOrdersView.vue')
+        component: () => import('@/views/admin/order/AdminOrdersView.vue')
       },
       {
         path: 'order/:id',
         name: '訂單詳細頁面',
-        component: () => import('@/views/admin/AdminOrderView.vue'),
+        component: () => import('@/views/admin/order/AdminOrderView.vue'),
         props: true
       },
       {
         path: 'coupons',
         name: '優惠券頁面',
-        component: () => import('@/views/admin/AdminCouponsView.vue')
+        component: () => import('@/views/admin/coupon/AdminCouponsView.vue')
       },
       {
         path: 'coupon/edit/:id',
         name: '優惠券單一編輯頁面',
-        component: () => import('@/views/admin/AdminCouponEditView.vue'),
+        component: () => import('@/views/admin/coupon/AdminCouponEditView.vue'),
         props: true
       },
       {
         path: 'coupon/add',
         name: '優惠券新增頁面',
-        component: () => import('@/views/admin/AdminCouponAddView.vue')
+        component: () => import('@/views/admin/coupon/AdminCouponAddView.vue')
+      },
+      {
+        path: 'articles',
+        name: '文章頁面',
+        component: () => import('@/views/admin/article/AdminArticlesView.vue')
+      },
+      {
+        path: 'article/edit/:id',
+        name: '文章單一編輯頁面',
+        component: () => import('@/views/admin/article/AdminArticleEditView.vue')
+      },
+      {
+        path: 'article/add',
+        name: '文章新增頁面',
+        component: () => import('@/views/admin/article/AdminArticleAddView.vue')
       }
     ]
+  },
+  // 404頁面
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/views/NotFound.vue')
   }
 ]
 

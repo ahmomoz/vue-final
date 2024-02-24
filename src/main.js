@@ -12,8 +12,8 @@ import * as AllRules from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 
-// import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import CKEditor from '@ckeditor/ckeditor5-vue' // 文字編輯器套件
 
 import App from './App.vue'
 import router from './router'
@@ -31,6 +31,7 @@ setLocale('zh_TW')
 
 const app = createApp(App)
 app.use(createPinia())
+app.use(CKEditor)
 app.use(router)
 app.config.globalProperties.$axios = axios
 app.config.globalProperties.$Swal = Swal

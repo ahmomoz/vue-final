@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="fs-3 mt-3">編輯產品 - {{ product.title }}</h1>
+    <h1 class="fs-3 mt-3">新增產品</h1>
       <div class="mx-auto">
         <!--圖片區塊-->
         <div class="card mt-4 shadow-sm">
@@ -11,39 +11,39 @@
               <loading v-if="isLoading" :active="isLoading" :can-cancel="false"/>
               <div class="mb-3">
                 <p>上傳圖片</p>
-                <input type="file" id="file" placeholder="請輸入圖片連結" @change="imgUpload($event)">
+                <input type="file" id="file" placeholder="請輸入圖片連結"
+                  @change="imgUpload($event)">
               </div>
               <!--圖片拖曳區塊-->
               <div class="border-dashed-blue mb-3">
                 <p class="m-0 text-primary px-2">*第一張圖為商品主圖</p>
-                <div class="py-5 bg-light" v-if="!product.imagesUrl[0]"><p class="px-2">請上傳圖片</p></div>
+                <div class="py-5 bg-light" v-if="!product.imagesUrl[0]">
+                  <p class="px-2">請上傳圖片</p>
+                </div>
                 <draggable
-                class="row px-2"
-                v-model="product.imagesUrl"
-                group="images"
-                itemKey="index"
-                @start="drag=true"
-                @end="drag=false"
+                  class="row px-2"
+                  v-model="product.imagesUrl"
+                  group="images"
+                  itemKey="index"
+                  @start="drag=true"
+                  @end="drag=false"
                 >
                   <template #item="{ element, index }">
                     <div class="mb-3" style="max-width: 160px;">
                       <div class="text-end" @click="deleteImg(index)" v-if="product.imagesUrl[0]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                        fill="currentColor" class="bi bi-dash-circle-fill"
-                        viewBox="0 0 16 16" style="color: rgb(180, 81, 81)">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1z"/></svg>
+                        <span class="bi bi-dash-circle-fill" style="color: rgb(180, 81, 81)"></span>
                       </div>
                       <img class="img-fluid" :src="element" alt="商品圖片"
-                      style="height: 100px;"
-                      @mouseover="changeCursor(true)"
-                      @mouseleave="changeCursor(false)">
+                        style="height: 100px;"
+                        @mouseover="changeCursor(true)"
+                        @mouseleave="changeCursor(false)">
                     </div>
                   </template>
                 </draggable>
               </div>
 
               <button class="btn btn-outline-primary btn-sm d-block w-100 mb-2"
-                @click="deleteAllImg">
+                @click="deleteAllImg" v-if="product.imagesUrl[0]">
                   刪除所有圖片
                 </button>
           </div>
@@ -143,11 +143,13 @@
       </div>
       <!--作用按鈕區塊-->
       <div class="text-end mt-3 mb-5">
-        <button type="button" class="btn btn-outline-secondary mx-2" @click="goBack">
-        取消
+        <button type="button" class="btn btn-outline-secondary mx-2"
+          @click="goBack">
+          取消
         </button>
-        <button type="button" class="btn btn-primary" @click="updateProduct">
-        確認
+        <button type="button" class="btn btn-primary text-light"
+          @click="addProduct">
+          確認
         </button>
       </div>
   </div>
@@ -157,48 +159,36 @@
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 import draggable from 'vuedraggable' // 引入 draggable
+const { VITE_API_URL, VITE_APIPATH } = import.meta.env
 
 export default {
   data () {
     return {
       drag: false,
-      product: {},
+      product: {
+        imagesUrl: []
+      },
       isLoading: true // Loading效果
     }
   },
   methods: {
-    getProductData () { // 取得產品資料
-      this.isLoading = true
-      const { id } = this.$route.params
-      this.$axios.get(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/products/all`)
-        .then(res => {
-          const products = res.data.products
-          this.product = products[id]
-        })
-        .catch(err => {
-          this.$Swal.fire({
-            icon: 'error',
-            title: err.response.data.message
-          })
-        })
-        .finally(() => {
-          this.isLoading = false
-        })
-    },
-    updateProduct () { // 更新產品
+    addProduct () { // 上傳產品函式
       const item = this.product
-      this.$axios.put(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/product/${this.product.id}`, { data: item })
+      this.isLoading = true
+      this.$axios.post(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/product`, { data: item })
         .then(res => {
+          this.isLoading = false
           this.$Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: '更新成功',
+            title: '新增成功',
             showConfirmButton: false,
             timer: 700
           })
           this.$router.push('/admin/products')
         })
         .catch(err => {
+          this.isLoading = false
           this.$Swal.fire({
             icon: 'error',
             title: err.response.data.message
@@ -222,7 +212,7 @@ export default {
       const file = e.target.files[0]
       const formData = new FormData()
       formData.append('file-to-upload', file)
-      this.$axios.post(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/upload`, formData)
+      this.$axios.post(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/upload`, formData)
         .then(res => {
           const url = res.data.imageUrl
           this.imgUrlUpdate(url)
@@ -244,8 +234,8 @@ export default {
       this.$router.go(-1)
     }
   },
-  created () {
-    this.getProductData()
+  mounted () {
+    this.isLoading = false
   },
   components: {
     Loading,
@@ -254,5 +244,5 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 </style>

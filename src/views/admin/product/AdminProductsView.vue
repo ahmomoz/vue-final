@@ -1,5 +1,4 @@
 <template>
-  <div id="app">
     <div class="card mt-lg-3 shadow-sm">
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
@@ -16,14 +15,14 @@
     </div>
     <div class="card my-1 my-lg-4 shadow-sm">
       <div class="card-header">
-        <div class="text-end">
+        <div class="text-end py-2">
             <button type="button" class="btn btn-primary text-white mx-3"
             @click="ascending=!ascending">
             {{ascending?"降冪":"升冪"}}排序
             </button>
             <router-link class="btn btn-primary text-light"
                   :to="'product/add'">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="4 4 12 12"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
+                  <span class="bi bi-plus"></span>
                   建立新的產品
             </router-link>
         </div>
@@ -37,7 +36,7 @@
                 <th>產品名稱</th>
                 <th @click="sortBy='price'">
                   售價
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up ms-1" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/></svg>
+                  <span class="bi bi-arrow-down-up ms-1"></span>
                 </th>
                 <th>狀態</th>
                 <th>操作</th>
@@ -96,13 +95,13 @@
         <card-pagination :pagination="pagination" @emit-getlist="getProductsList"></card-pagination>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
 import CardPagination from '@/components/CardPagination.vue' // 分頁元件
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
+const { VITE_API_URL, VITE_APIPATH } = import.meta.env
 
 export default {
   data () {
@@ -119,7 +118,7 @@ export default {
   methods: {
     getProductsList (page = 1) { // 取得產品資料
       this.isLoading = true
-      this.$axios.get(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/products?page=${page}`)
+      this.$axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/products?page=${page}`)
         .then(res => {
           const { products, pagination } = res.data
           this.allProducts = products
@@ -148,8 +147,11 @@ export default {
           this.$axios.delete(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/product/${id}`)
             .then(res => {
               this.$Swal.fire({
+                position: 'top-end',
                 title: '已刪除',
-                icon: 'success'
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 700
               })
               this.getProductsList() // 重新取得產品列表
             })

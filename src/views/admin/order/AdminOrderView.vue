@@ -2,8 +2,14 @@
   <div class="container">
     <div class="d-flex justify-content-between my-3">
       <h1 class="fs-3">訂單詳情</h1>
-      <button type="button" class="btn btn-primary text-light" @click="togglePaymentStatus" v-if="order.is_paid">切換成未付款</button>
-      <button type="button" class="btn btn-primary text-light" @click="togglePaymentStatus" v-else>切換成已付款</button>
+      <button type="button" class="btn btn-primary text-light"
+        @click="togglePaymentStatus" v-if="order.is_paid">
+        切換成未付款
+      </button>
+      <button type="button" class="btn btn-primary text-light"
+        @click="togglePaymentStatus" v-else>
+        切換成已付款
+      </button>
     </div>
         <!--訂單摘要-->
         <dl class="row rounded border-2 border-dashed-blue p-2">
@@ -27,8 +33,12 @@
                 <template v-for="product in order.products" :key="product.product.id">
                     <div class="d-flex align-items-center m-2">
                         <img :src="product.product.imagesUrl[0]" alt="商品圖片" style="width: 100px;">
-                        <p class="mx-2 my-auto">{{ product.product.title }} x {{ product.qty }}</p>
-                        <p class="text-end mx-2 my-auto">NT$ {{ product.product.price }}</p>
+                        <p class="mx-2 my-auto">
+                          {{ product.product.title }} x {{ product.qty }}
+                        </p>
+                        <p class="text-end mx-2 my-auto">
+                          NT$ {{ product.product.price }}
+                        </p>
                     </div>
                 </template>
             </div>
@@ -71,11 +81,13 @@
         </div>
         <!--作用按鈕區塊-->
         <div class="text-end mt-3 mb-5">
-          <button type="button" class="btn btn-outline-secondary mx-2" @click="goBack">
-          返回前頁
+          <button type="button" class="btn btn-outline-secondary mx-2"
+            @click="goBack">
+            返回前頁
           </button>
-          <button type="button" class="btn btn-danger text-light" @click="deleteOrder">
-          刪除訂單
+          <button type="button" class="btn btn-danger text-light"
+            @click="deleteOrder">
+            刪除訂單
           </button>
         </div>
       </div>
@@ -85,6 +97,7 @@
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 import moment from 'moment' // 日期轉換套件
+const { VITE_API_URL, VITE_APIPATH } = import.meta.env
 
 export default {
   props: ['id'],
@@ -99,7 +112,7 @@ export default {
     getOrderList (currentPage) { // 取得訂單資料
       this.isLoading = true
       const { id } = this.$route.params
-      this.$axios.get(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/orders?page=${currentPage}`)
+      this.$axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/orders?page=${currentPage}`)
         .then(res => {
           const orders = res.data.orders
           this.order = orders.find(order => order.id.toLowerCase().includes(id.toLowerCase()))
@@ -115,17 +128,20 @@ export default {
         })
     },
     goBack () {
-      this.$router.push('/admin/orders')
+      this.$router.push('/dashboard/orders')
     },
     togglePaymentStatus () { // 切換付款狀態
       this.isLoading = true
       this.order.is_paid = !this.order.is_paid
       const { id } = this.$route.params
-      this.$axios.put(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/order/${id}`, { data: this.order })
+      this.$axios.put(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/order/${id}`, { data: this.order })
         .then(res => {
           this.$Swal.fire({
+            position: 'top-end',
             icon: 'success',
-            title: '更新成功'
+            title: '更新成功',
+            showConfirmButton: false,
+            timer: 700
           })
           this.getOrderList(this.currentPage)
         })
@@ -151,13 +167,16 @@ export default {
         cancelButtonText: '取消'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$axios.delete(`${import.meta.env.VITE_API_URL}/api/${import.meta.env.VITE_APIPATH}/admin/order/${this.order.id}`)
+          this.$axios.delete(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/order/${this.order.id}`)
             .then(res => {
               this.$Swal.fire({
+                position: 'top-end',
+                icon: 'success',
                 title: '已刪除',
-                icon: 'success'
+                showConfirmButton: false,
+                timer: 700
               })
-              this.$router.push('/admin/orders') // 返回前頁
+              this.$router.push('/dashboard/orders') // 返回前頁
             })
             .catch(err => {
               this.$Swal.fire({
