@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as s,a as o}from"./index-UcymovWQ.js";const n={name:"NotFound"},c={class:"p-5"},a=o("h1",null,"404 Not Found",-1),r=o("p",null,"Sorry, the page you are looking for does not exist.",-1),_=[a,r];function d(i,p,l,u,f,h){return t(),s("div",c,_)}const x=e(n,[["render",d]]);export{x as default};
