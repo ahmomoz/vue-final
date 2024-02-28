@@ -3,31 +3,38 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+import App from './App.vue'
+import router from './router'
 
+// sweetalert套件
+import Swal from 'sweetalert2'
+// 表單驗證套件
 import {
   Form, Field, ErrorMessage, defineRule, configure
 } from 'vee-validate'
 import * as AllRules from '@vee-validate/rules'
+// i18n多國語系
 import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
-
+// bootstrap JS
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
-import CKEditor from '@ckeditor/ckeditor5-vue' // 文字編輯器套件
+// 文字編輯器套件
+import CKEditor from '@ckeditor/ckeditor5-vue'
 
-import App from './App.vue'
-import router from './router'
-
+/**
+ * 這裡是將所有 vee-validate 的規則載入
+ */
 Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule])
 })
+/**
+ * 這裡是設定 vee-validate 的語系
+ */
 configure({
-  generateMessage: localize({ zh_TW: zhTW }), // 繁體中文
+  generateMessage: localize({ zh_TW: zhTW }), // 載入繁體中文語系
   validateOnInput: true // 輸入內容直接驗證
 })
-
-// 設定語系
-setLocale('zh_TW')
+setLocale('zh_TW') // 設定預設語系
 
 const app = createApp(App)
 app.use(createPinia())

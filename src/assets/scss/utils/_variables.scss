@@ -309,6 +309,7 @@ $warning:       $yellow !default;
 $danger:        $red-primary !default; //$red !default costomer;
 $light:         $gray-100 !default;
 $dark:          $gray-900 !default;
+$gray:          $gray-700 !default; //costomer
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
@@ -320,7 +321,8 @@ $theme-colors: (
   "warning":    $warning,
   "danger":     $danger,
   "light":      $light,
-  "dark":       $dark
+  "dark":       $dark,
+  "gray":       $gray //costomer
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -418,6 +420,12 @@ $spacers: (
   3: $spacer,
   4: $spacer * 1.5,
   5: $spacer * 3,
+  // customer
+  6: $spacer * 6,
+  7: $spacer * 7,
+  8: $spacer * 8,
+  9: $spacer * 9,
+  10: $spacer * 15,
 ) !default;
 // scss-docs-end spacer-variables-maps
 
@@ -638,8 +646,6 @@ $h2-font-size:                $font-size-base * 2 !default;
 $h3-font-size:                $font-size-base * 1.75 !default;
 $h4-font-size:                $font-size-base * 1.5 !default;
 $h5-font-size:                $font-size-base * 1.25 !default;
-$h6-font-size:                $font-size-base !default;
-// scss-docs-end font-variables
 
 // scss-docs-start font-sizes
 $font-sizes: (
@@ -648,7 +654,6 @@ $font-sizes: (
   3: $h3-font-size,
   4: $h4-font-size,
   5: $h5-font-size,
-  6: $h6-font-size
 ) !default;
 // scss-docs-end font-sizes
 

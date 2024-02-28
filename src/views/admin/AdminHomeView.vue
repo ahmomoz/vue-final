@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col mt-4 text-end">
-            <RouterLink to="/" class="nav-link text-primary fs-5">
+            <RouterLink to="/home" class="nav-link text-primary fs-5">
                 <i class="bi bi-arrow-up-left-square me-1"></i>
                 跳轉至前台首頁
             </RouterLink>

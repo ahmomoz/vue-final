@@ -1,0 +1,28 @@
+//--字距調整
+body {
+    letter-spacing: 3px;
+}
+.letter-spacing-7 {
+    letter-spacing: 7px;
+}
+
+//--文字粗體
+.fw-500 {
+    font-weight: 500;
+}
+
+
+//--透明背景
+.bg-transparent {
+    background-color: transparent
+}
+
+//--垂直文字
+.text-vrl {
+    writing-mode: vertical-rl
+}
+.text-lg-vrl {
+    @media (min-width: 992px) { 
+        writing-mode: vertical-rl;
+    }
+}

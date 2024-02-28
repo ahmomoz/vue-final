@@ -102,7 +102,7 @@ export default {
     bottom: 0;
     left: 0;
     overflow-y: auto;
-    width: 200px;
+    width: 250px;
     z-index: 1000;
     height: 100vh;
 }
