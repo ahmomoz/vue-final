@@ -103,7 +103,10 @@ export default {
           this.pagination = pagination
         })
         .catch(err => {
-          alert(err.response.data.message)
+          this.$Swal.fire({
+            icon: 'error',
+            title: err.response.data.message
+          })
         })
         .finally(() => {
           this.isLoading = false

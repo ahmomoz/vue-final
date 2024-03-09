@@ -30,7 +30,7 @@
 //--header-nav-link
 .header-nav-link {
     &.active {
-      border-bottom: 3px solid #8bafd7; // 下底線樣式
+      border-bottom: 3px solid #383838; // 下底線樣式
     }
 }
 
@@ -67,47 +67,61 @@
     }
 }
 
-//--Category圖片區塊hover效果
+//--只有底部陰影效果
+.shadow-bottom {
+    box-shadow: 0px 15px 15px rgba(186, 186, 186, 0.6);;
+}
+
+
+//--圖片hover效果
 .image-container {
     position: relative;
     overflow: hidden;
 }
-
 .image-container img {
-    transition: filter 0.3s ease; // 模糊
-    transition: transform 1s ease; //放大
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.hover-card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-.image-container:hover .overlay {
-    opacity: 1;
+    transition: transform 1s ease; // 放大
 }
 .image-container:hover img {
-    filter: blur(5px);
     transform: scale(1.2);
 }
-.image-container:hover .hover-card {
-    opacity: 1;
+
+//--分類區塊hover效果 & 全部商品中商品卡片hover效果
+.category-hover, .product-card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover{
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3); 
+        transform: translate(0px, -10px); // 向上位移
+    }
+}
+
+//--link hover
+.link-hover {
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -3px; /* 下底線與文字距離 */
+        width: 0;
+        height: 1px; /* 下底線的粗細 */
+        background-color: #383838; /* 下底線顏色 */
+        transition: width 0.3s ease; /* 過度效果，控制寬度的動畫*/
+    }
+    &:hover::after {
+        width: 100%;
+    }
+}
+
+//--article hover
+.article-hover {
+    transition: transform 0.3s ease;
+    &:hover{
+        background: #f1f1f1;
+        transform: translateX(30px); // 向右位移
+    }
+}
+
+//--頁碼
+.page-link {
+    margin: 0px 10px;
 }
