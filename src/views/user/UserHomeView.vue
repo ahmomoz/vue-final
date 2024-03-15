@@ -1,16 +1,21 @@
 <template>
-  <!--Header區塊-->
+  <loading v-if="isLoading" :active="isLoading" :can-cancel="false">
+    <img style="width: 200px;" src="@/assets/images/image/loading-img2.gif" alt="to-top-btn">
+  </loading>
   <header class="container-fluid">
-    <div class="row d-flex justify-content-between my-lg-7">
+    <!--Header區塊-->
+    <div class="row d-flex justify-content-between my-lg-5">
       <div class="col-lg-2">
         <h1 class="lh-base fs-1 text-gray letter-spacing-7 text-vrl pt-7 py-lg-7 mx-auto">
           和<span class="text-primary">小動物</span>們相遇，<br>
           &nbsp;&nbsp;&nbsp;&nbsp;來場<span class="text-primary">治癒身心</span>的輕旅行。
         </h1>
       </div>
-      <div class="col-lg-10 mb-lg-2">
+      <div class="col-lg-10">
         <div class="text-end">
-          <RouterLink to="/home"><img class="img-fluid" src="@/assets/images/logo/logo.png" alt="logo"></RouterLink>
+          <RouterLink to="/">
+            <img class="img-fluid" src="@/assets/images/logo/logo.png" alt="logo">
+          </RouterLink>
         </div>
         <swiper
           class="mySwiper"
@@ -29,13 +34,13 @@
         >
           <swiper-slide><img src="@/assets/images/banner/indexBanner-1.jpg" alt="banner"></swiper-slide>
           <swiper-slide><img src="@/assets/images/banner/indexBanner-4.jpg" alt="banner"></swiper-slide>
-          <swiper-slide><img src="@/assets/images/banner/indexBanner-3.jpg" alt="banner"></swiper-slide>
+          <swiper-slide><img src="@/assets/images/banner/indexBanner-5.jpg" alt="banner"></swiper-slide>
         </swiper>
       </div>
     </div>
   </header>
-  <!--About區塊-->
   <section class="container-fluid about-fixed-background shadow-bottom rounded-5">
+    <!--About區塊-->
     <div class="row mt-5 py-lg-7 gradient-border">
       <div class="col py-7 py-lg-10">
         <p class="fs-3 text-gray text-center m-0">About</p>
@@ -54,33 +59,40 @@
       </div>
     </div>
   </section>
-  <!--News區塊-->
   <section class="container mt-8 mt-lg-10 p-lg-0">
+    <!--News區塊-->
     <div class="row">
       <div class="col-lg-4">
         <div class="text-gray text-center">
           <p class="fs-3 m-0">News</p>
-          <h2 class="lh-base fs-1 text-gray"><img src="@/assets/images/image/leaf-primary.png" alt="logo" class="img-fluid pe-2">最新消息</h2>
+          <h2 class="lh-base fs-1 text-gray">
+            <img src="@/assets/images/image/leaf-primary.png" alt="logo" class="img-fluid pe-2">
+            最新消息
+          </h2>
         </div>
       </div>
       <div class="col-lg-8">
         <ul class="list-group list-group-flush my-5 my-lg-0">
-          <li class="list-group-item mt-2 py-0 article-hover" v-for="article in articles.slice(0, 6)" :key="article.id">
+          <li class="list-group-item mt-2 py-0 article-hover"
+            v-for="article in articles.slice(0, 6)" :key="article.id">
             <span class="lh-lg fs-5 text-gray opacity-75 pe-3">{{ formatDateString(article.create_at) }}</span>
             <span class="bg-gray lh-lg fs-5 text-light opacity-50 px-2">{{ article.tag }}</span>
             <p class="lh-lg fs-4 text-gray">{{ article.title }}</p>
           </li>
         </ul>
       <div class="d-flex align-items-center justify-content-end">
-        <RouterLink class="text-decoration-none" to="/products">
-          <p class="text-dark my-lg-3 link-hover">view all<i class="bi bi-arrow-right-short"></i></p>
+        <RouterLink class="text-decoration-none" to="/articles">
+          <p class="text-dark my-3 link-hover">
+            view all
+            <i class="bi bi-arrow-right-short"></i>
+          </p>
         </RouterLink>
       </div>
       </div>
     </div>
   </section>
-  <!--Category區塊-->
   <section class="container-fluid mt-6 mt-lg-7 p-lg-0">
+    <!--Category區塊-->
     <p class="fs-3 text-gray text-center m-0">Category</p>
     <h2 class="lh-base fs-1 text-gray text-center">
         <img src="@/assets/images/image/leaf-primary.png" alt="logo" class="img-fluid">
@@ -88,9 +100,11 @@
     </h2>
     <div class="row g-2 mt-5">
         <div class="col-lg-6 col-12 category-hover">
-          <router-link class="text-decoration-none" :to="{ name: '產品列表', query: { category: '動物園' }}">
+          <router-link class="text-decoration-none"
+            :to="{ name: '產品列表', query: { category: '動物園' }}">
             <div>
-                <img style="width: 100%;" class="object-fit" src="@/assets/images/image/zoo.jpg" alt="zoo">
+                <img style="width: 100%;" class="object-fit"
+                  src="@/assets/images/image/zoo.jpg" alt="zoo">
             </div>
             <div class="text-center py-4 p-lg-5 bg-light">
               <h3 class="text-gray fs-2 fw-bolder m-0">動物園</h3>
@@ -101,9 +115,11 @@
           </router-link>
         </div>
         <div class="col-lg-6 col-12 category-hover">
-          <router-link class="text-decoration-none" :to="{ name: '產品列表', query: { category: '動物聚落' }}">
+          <router-link class="text-decoration-none"
+            :to="{ name: '產品列表', query: { category: '動物聚落' }}">
             <div>
-                <img style="width: 100%;" class="object-fit" src="@/assets/images/image/settlement.jpg" alt="settlement">
+                <img style="width: 100%;" class="object-fit"
+                  src="@/assets/images/image/settlement.jpg" alt="settlement">
             </div>
             <div class="text-center py-4 p-lg-5 bg-light">
               <h3 class="text-gray fs-2 fw-bolder m-0">動物村 / 動物聚落</h3>
@@ -116,9 +132,11 @@
     </div>
     <div class="row g-2 mt-lg-1">
         <div class="col-lg-4 col-12 category-hover">
-          <router-link class="text-decoration-none" :to="{ name: '產品列表', query: { category: '農場' }}">
+          <router-link class="text-decoration-none"
+            :to="{ name: '產品列表', query: { category: '農場' }}">
             <div>
-                <img style="width: 100%;" class="object-fit" src="@/assets/images/image/animalsfarm.jpg" alt="animals-farm">
+              <img style="width: 100%;" class="object-fit"
+                src="@/assets/images/image/animalsfarm.jpg" alt="animals-farm">
             </div>
             <div class="text-center py-4 p-lg-5 bg-light">
               <h3 class="text-gray fs-2 fw-bolder m-0">動物農場</h3>
@@ -130,9 +148,11 @@
           </router-link>
         </div>
         <div class="col-lg-4 col-12 category-hover">
-          <router-link class="text-decoration-none" :to="{ name: '產品列表', query: { category: '水族館' }}">
+          <router-link class="text-decoration-none"
+            :to="{ name: '產品列表', query: { category: '水族館' }}">
             <div>
-                <img style="width: 100%;" class="object-fit" src="@/assets/images/image/aquarium.jpg" alt="aquarium">
+              <img style="width: 100%;" class="object-fit"
+                src="@/assets/images/image/aquarium.jpg" alt="aquarium">
             </div>
             <div class="text-center py-4 p-lg-5 bg-light">
               <h3 class="text-gray fs-2 fw-bolder m-0">水族館</h3>
@@ -144,9 +164,11 @@
           </router-link>
         </div>
         <div class="col-lg-4 col-12 category-hover">
-          <router-link class="text-decoration-none" :to="{ name: '產品列表', query: { category: '鳥園' }}">
+          <router-link class="text-decoration-none"
+            :to="{ name: '產品列表', query: { category: '鳥園' }}">
             <div>
-                <img style="width: 100%;" class="object-fit" src="@/assets/images/image/birdpark.jpg" alt="bird-park">
+              <img style="width: 100%;" class="object-fit"
+                src="@/assets/images/image/birdpark.jpg" alt="bird-park">
             </div>
             <div class="text-center py-4 p-lg-5 bg-light">
               <h3 class="text-gray fs-2 fw-bolder m-0">鳥園</h3>
@@ -159,8 +181,8 @@
         </div>
     </div>
   </section>
-  <!--Products區塊-->
   <section class="container my-7 p-lg-0">
+    <!--Products區塊-->
     <p class="fs-3 text-gray text-center m-0">Products</p>
     <h2 class="lh-base fs-1 text-gray text-center">
       <img src="@/assets/images/image/leaf-primary.png" alt="logo" class="img-fluid">
@@ -172,19 +194,23 @@
           <div class="card mb-4 border-0 shadow-sm">
             <div style="position: relative;">
                 <div class="image-container" >
-                  <span class="fs-5 text-dark bg-white ps-2 opacity-75" style="position: absolute; top: 15px; z-index: 2;">
+                  <span class="fs-5 text-dark bg-white ps-2 opacity-75"
+                    style="position: absolute; top: 15px; z-index: 2;">
                     <i class="bi bi-geo-alt-fill"></i>
                     {{ product.nation }}{{ product.area }}
                   </span>
-                  <img :src="product.imagesUrl[0]" style="height: 280px; z-index: 1;" class="card-img-top object-fit-cover" alt="product-img">
+                  <img :src="product.imagesUrl[0]" style="height: 280px;
+                    z-index: 1;" class="card-img-top object-fit-cover" alt="product-img">
                 </div>
             </div>
             <div class="card-body">
-              <span class="fs-5 text-primary"><i class="bi bi-play-fill"></i> {{ product.category }}</span>
-                <h4 class="card-text text-dark my-2 link-hover">{{ product.title }}</h4>
+              <span class="fs-5 text-primary">
+                <i class="bi bi-play-fill"></i> {{ product.category }}
+              </span>
+              <h4 class="card-text text-dark my-2 link-hover">{{ product.title }}</h4>
               <p>{{ product.feature }}</p>
               <p class="fs-5 text-primary fw-bolder">
-                <del style="color: rgb(196, 196, 196);"> NT${{ product.origin_price }}</del><br>
+                <del style="color: rgb(196, 196, 196);">NT${{ product.origin_price }}</del><br>
                 NT${{ product.price }}
               </p>
             </div>
@@ -193,14 +219,19 @@
       </div>
       <div class="d-flex align-items-center justify-content-end">
         <RouterLink class="text-decoration-none" to="/products">
-          <p class="text-dark my-3 link-hover">view all<i class="bi bi-arrow-right-short"></i></p>
+          <p class="text-dark my-3 link-hover">
+            view all
+            <i class="bi bi-arrow-right-short"></i>
+          </p>
         </RouterLink>
       </div>
     </div>
   </section>
-  <loading v-if="isLoading" :active="isLoading" :can-cancel="false"/>
 </template>
+
 <script>
+import { mapActions, mapState } from 'pinia'
+import productStore from '@/stores/productStore'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
 // Import Swiper styles
@@ -208,7 +239,6 @@ import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-
 import { EffectFade, Autoplay, Navigation, Pagination } from 'swiper/modules'
 
 // loading
@@ -223,29 +253,17 @@ const { VITE_API_URL, VITE_APIPATH } = import.meta.env
 export default {
   data () {
     return {
-      products: [], // 產品列表
       articles: [], // 文章列表
       modules: [EffectFade, Autoplay, Navigation, Pagination],
-      isLoading: true // Loading效果
+      isLoading: true, // Loading效果
+      loader: 'bars'
     }
   },
+  computed: {
+    ...mapState(productStore, ['products'])
+  },
   methods: {
-    getProductsList () { // 取得產品資料
-      this.isLoading = true
-      this.$axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/products/all`)
-        .then(res => {
-          this.products = res.data.products
-        })
-        .catch(err => {
-          this.$Swal.fire({
-            icon: 'error',
-            title: err.response.data.message
-          })
-        })
-        .finally(() => {
-          this.isLoading = false
-        })
-    },
+    ...mapActions(productStore, ['getAllProductsList']),
     getArticlesList (page = 1) { // 取得文章資料
       this.isLoading = true
       this.$axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/articles?page=${page}`)
@@ -273,9 +291,30 @@ export default {
   },
   mounted () {
     this.getArticlesList()
-    this.getProductsList()
+    this.getAllProductsList()
   }
 }
 </script>
 <style scoped>
+.swiper {
+    height: 600px;
+}
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+.swiper-slide img {
+    width: 100%;
+    height: 99.83vh;
+    object-fit: cover;
+    transition: 1s linear 2s;
+    transform: scale(1.1, 1.1);
+}
+.swiper-slide-active img,
+.swiper-slide-duplicate-active img {
+    transition: 8s linear;
+    transform: scale(1, 1);
+}
+
 </style>

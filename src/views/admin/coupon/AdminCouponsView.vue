@@ -18,7 +18,7 @@
                   <th>名稱</th>
                   <th>折扣數</th>
                   <th>狀態</th>
-                  <th>最後更新時間</th>
+                  <th>到期時間</th>
                   <th>操作</th>
               </tr>
               </thead>
@@ -28,7 +28,7 @@
               <tr v-for="coupon in coupons" :key="coupon.id">
                   <td> {{ coupon.code }} </td>
                   <td> {{ coupon.title }} </td>
-                  <td> {{ coupon.percent }}%</td>
+                  <td> {{ 100-coupon.percent }}%</td>
                   <td>
                   <span class="text-primary" v-if="coupon.is_enabled">已啟用</span>
                   <span v-else>未啟用</span>

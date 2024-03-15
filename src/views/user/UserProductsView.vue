@@ -1,99 +1,159 @@
 <template>
-  <loading v-if="isLoading" :active="isLoading" :can-cancel="false"/>
-  <div class="container-fluid bg-light py-8 px-5 px-xl-10">
-    <nav class="mb-5" aria-label="breadcrumb">
+  <loading v-if="isLoading" :active="isLoading" :can-cancel="false">
+    <img style="width: 200px;" src="@/assets/images/image/loading-img2.gif" alt="to-top-btn">
+  </loading>
+  <header class="container-fluid bg-light pt-6 pb-5 py-xl-8 px-3 px-xl-10">
+    <nav class="mb-3 mb-xl-5" aria-label="breadcrumb">
       <!--麵包屑-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><RouterLink class="text-decoration-none" to="/home" exact>首頁</RouterLink></li>
+        <li class="breadcrumb-item">
+          <RouterLink class="text-decoration-none" to="/" exact>首頁</RouterLink>
+        </li>
         <li class="breadcrumb-item active" aria-current="page">
           {{ category === '' || category === undefined ? '所有商品' : category }}
         </li>
       </ol>
     </nav>
-    <p class="fs-3 text-gray my-0 ms-5">Products</p>
-    <h2 class="lh-base fs-1 text-gray">
+    <p class="fs-xl-3 text-gray my-0 ms-5">Products</p>
+    <h2 class="lh-base fs-xl-1 text-gray">
       <img src="@/assets/images/image/leaf-primary.png" alt="logo" class="img-fluid">
       {{ category === '' || category === undefined ? '所有商品' : `${category} 所有商品` }}
     </h2>
-    <div class="w-50 d-flex justify-content-between bg-white shadow-sm rounded-pill mt-4 px-lg-4 py-lg-3">
+    <div class="w-xl-50 d-flex justify-content-between bg-white
+      rounded-pill mt-4 px-3 px-lg-4 py-lg-3 shadow-sm">
       <i class="bi bi-search my-auto"></i>
       <input class="fs-5 form-control border-0" type="search"
         placeholder="想找些什麼呢？" v-model="searchInput" @keyup.enter="productSearch">
     </div>
-  </div>
-  <div class="container-fluid px-xl-10 mt-5 mt-xl-5">
-      <div class="d-flex flex-wrap justify-content-center">
-        <router-link to="/products"
-          class="w-100 card nav-link link-hover p-xl-2 shadow-sm me-xl-3"
-          @click="productCategoryFilter('')">
-          <p class="fs-3 m-auto" :class="{ 'text-primary' : !$route.query.category }">所有商品</p>
-        </router-link>
-        <router-link :to="{ name: '產品列表', query: { category: '動物園' }}"
-          class="w-100 card nav-link link-hover p-xl-2 shadow-sm me-xl-3"
-          @click="productCategoryFilter('動物園')">
-          <p class="fs-3 m-auto" :class="{ 'text-primary': $route.query.category === '動物園' }">動物園</p>
-        </router-link>
-        <router-link :to="{ name: '產品列表', query: { category: '動物聚落' }}"
-          class="w-100 card nav-link link-hover p-xl-2 shadow-sm me-xl-3"
-          @click="productCategoryFilter('動物聚落')">
-          <p class="fs-3 m-auto" :class="{ 'text-primary': $route.query.category === '動物聚落' }">動物村/<br>動物聚落</p>
-        </router-link>
-        <router-link :to="{ name: '產品列表', query: { category: '農場' }}"
-          class="w-100 card nav-link link-hover p-xl-2 shadow-sm me-xl-3"
-          @click="productCategoryFilter('農場')">
-          <p class="fs-3 m-auto" :class="{ 'text-primary': $route.query.category === '農場' }">動物農場</p>
-        </router-link>
-        <router-link :to="{ name: '產品列表', query: { category: '水族館' }}"
-          class="w-100 card nav-link link-hover p-xl-2 shadow-sm me-xl-3"
-          @click="productCategoryFilter('水族館')">
-          <p class="fs-3 m-auto" :class="{ 'text-primary': $route.query.category === '水族館' }">水族館</p>
-        </router-link>
-        <router-link :to="{ name: '產品列表', query: { category: '鳥園' }}"
-          class="w-100 card nav-link link-hover p-xl-2 shadow-sm me-xl-3"
-          @click="productCategoryFilter('鳥園')">
-          <p class="fs-3 m-auto" :class="{ 'text-primary': $route.query.category === '鳥園' }">鳥園</p>
-        </router-link>
-      </div>
-    <div class="row my-4 my-xl-5">
-      <div class="col-3 card d-none d-xl-block">
-        <!--左邊類別選擇欄-->
+  </header>
+  <main class="container-fluid px-xl-10 mt-4 mt-xl-5">
+    <section class="d-flex flex-wrap flex-xl-nowrap
+      justify-content-center justify-content-xl-between">
+      <router-link to="/products"
+        class="w-25 w-xl-100 card nav-link link-hover py-2 p-xl-2 shadow-sm m-2 me-xl-3"
+        @click="productCategoryFilter('')">
+        <p class="fs-xl-3 m-auto"
+          :class="{ 'text-primary' : !$route.query.category }">所有商品</p>
+      </router-link>
+      <router-link :to="{ name: '產品列表', query: { category: '動物園' }}"
+        class="w-25 w-xl-100 card nav-link link-hover py-2 p-xl-2 shadow-sm m-2 me-xl-3"
+        @click="productCategoryFilter('動物園')">
+        <p class="fs-xl-3 m-auto"
+          :class="{ 'text-primary': $route.query.category === '動物園' }">動物園</p>
+      </router-link>
+      <router-link :to="{ name: '產品列表', query: { category: '動物聚落' }}"
+        class="w-25 w-xl-100 card nav-link link-hover py-2 p-xl-2 shadow-sm m-2 me-xl-3"
+        @click="productCategoryFilter('動物聚落')">
+        <p class="fs-xl-3 m-auto"
+          :class="{ 'text-primary': $route.query.category === '動物聚落' }">動物聚落</p>
+      </router-link>
+      <router-link :to="{ name: '產品列表', query: { category: '農場' }}"
+        class="w-25 w-xl-100 card nav-link link-hover py-2 p-xl-2 shadow-sm m-2 me-xl-3"
+        @click="productCategoryFilter('農場')">
+        <p class="fs-xl-3 m-auto"
+          :class="{ 'text-primary': $route.query.category === '農場' }">動物農場</p>
+      </router-link>
+      <router-link :to="{ name: '產品列表', query: { category: '水族館' }}"
+        class="w-25 w-xl-100 card nav-link link-hover py-2 p-xl-2 shadow-sm m-2 me-xl-3"
+        @click="productCategoryFilter('水族館')">
+        <p class="fs-xl-3 m-auto"
+          :class="{ 'text-primary': $route.query.category === '水族館' }">水族館</p>
+      </router-link>
+      <router-link :to="{ name: '產品列表', query: { category: '鳥園' }}"
+        class="w-25 w-xl-100 card nav-link link-hover py-2 p-xl-2 shadow-sm m-2 me-xl-3"
+        @click="productCategoryFilter('鳥園')">
+        <p class="fs-xl-3 m-auto"
+          :class="{ 'text-primary': $route.query.category === '鳥園' }">鳥園</p>
+      </router-link>
+    </section>
+    <section class="row my-4 my-xl-5">
+      <nav class="col-3 card d-none d-xl-block">
+        <!--網頁版左邊地區篩選欄-->
         <div class="position-sticky card-body" style="top: 5rem;">
           <div class="p-4">
             <h3 class="fw-500">依地區篩選</h3>
             <h4 class="fw-500 mt-xl-4">台灣</h4>
             <div class="form-check" v-for="(taiwanArea,key) in taiwanAreas" :key="'taiwanArea'+key">
-              <input class="form-check-input fs-5 mt-xl-3" type="checkbox" :value="taiwanArea" :id="taiwanArea+key" v-model="filterArea" @change="productAreaFilter">
+              <input class="form-check-input fs-5 mt-xl-3" type="checkbox"
+                :value="taiwanArea" :id="taiwanArea+key"
+                v-model="filterArea" @change="productAreaFilter">
               <label class="form-check-label fs-5 mt-xl-2" :for="taiwanArea+key">
                   {{ taiwanArea }}
               </label>
             </div>
           </div>
-
           <div class="p-4">
             <h4 class="fw-500 mt-xl-4">日本</h4>
             <div class="form-check" v-for="(japanArea,key) in japanAreas" :key="'japanArea'+key">
-              <input class="form-check-input fs-5 mt-xl-3" type="checkbox" :value="japanArea" :id="japanArea+key" v-model="filterArea" @change="productAreaFilter">
+              <input class="form-check-input fs-5 mt-xl-3" type="checkbox"
+                :value="japanArea" :id="japanArea+key"
+                v-model="filterArea" @change="productAreaFilter">
               <label class="form-check-label fs-5 mt-xl-2" :for="japanArea+key">
                   {{ japanArea }}
               </label>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-xl-9">
-        <!--商品卡片-->
+      </nav>
+      <main class="col-xl-9">
+        <!--商品篩選列表-->
         <div class="container-fluid">
-          <div class="dropdown d-flex justify-content-end">
-            <p class="fs-5 my-auto me-3">排序方式</p>
-            <button class="btn btn-outline-primary fs-5 py-2 px-4 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="width: 200px;">
+          <div class="dropdown d-flex justify-content-center justify-content-xl-end">
+            <p class="fs-xl-5 my-auto me-3">排序方式</p>
+            <button class="btn btn-outline-primary fs-xl-5 py-2 px-4 dropdown-toggle"
+            type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+            aria-expanded="false" style="width: 200px;">
               {{ selectedOption }}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li v-for="(option, index) in options" :key="index">
-                <a class="dropdown-item fs-5" href="#" @click.prevent="selectOption(option)">{{ option }}</a>
+                <a class="dropdown-item fs-5" href="#"
+                  @click.prevent="selectOption(option)">
+                  {{ option }}
+                </a>
               </li>
             </ul>
           </div>
+          <!--行動版地區篩選欄-->
+          <div class="accordion px-3 mt-3 d-block d-xl-none" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button collapsed py-2" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseOne"
+              aria-expanded="true" aria-controls="collapseOne">
+              <i class="bi bi-funnel"></i>地區篩選
+              </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse"
+                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body d-flex justify-content-around py-4">
+                  <div class="">
+                    <h4 class="fs-5 fw-500 mt-xl-4">台灣</h4>
+                    <div class="form-check" v-for="(taiwanArea,key) in taiwanAreas" :key="'taiwanArea'+key">
+                      <input class="form-check-input mt-xl-3" type="checkbox"
+                        :value="taiwanArea" :id="taiwanArea+key"
+                        v-model="filterArea" @change="productAreaFilter">
+                      <label class="form-check-label mt-xl-2" :for="taiwanArea+key">
+                        {{ taiwanArea }}
+                      </label>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 class="fs-5 fw-500 mt-xl-4">日本</h4>
+                    <div class="form-check" v-for="(japanArea,key) in japanAreas" :key="'japanArea'+key">
+                      <input class="form-check-input mt-xl-3" type="checkbox"
+                        :value="japanArea" :id="japanArea+key"
+                        v-model="filterArea" @change="productAreaFilter">
+                      <label class="form-check-label mt-xl-2" :for="japanArea+key">
+                        {{ japanArea }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--商品卡片-->
           <!--not sort-->
           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3" v-if="sortBy==='default'">
             <div class="col mt-4" v-for="product in products" :key="product.id">
@@ -101,19 +161,29 @@
                 <div class="card h-100 mb-4 border-0 shadow-sm product-card-hover">
                   <div style="position: relative;">
                     <div>
-                      <span class="fs-5 text-dark bg-white ps-2 opacity-75" style="position: absolute; top: 15px; z-index: 2;">
+                      <span class="fs-5 text-dark bg-white ps-2 opacity-75"
+                        style="position: absolute; top: 15px; z-index: 2;">
                         <i class="bi bi-geo-alt-fill"></i>
                         {{ product.nation }}{{ product.area }}
                       </span>
-                      <img :src="product.imagesUrl[0]" style="height: 240px; z-index: 1;" class="card-img-top object-fit-cover" alt="product-img">
+                      <img :src="product.imagesUrl[0]" style="height: 240px; z-index: 1;"
+                        class="card-img-top object-fit-cover" alt="product-img">
                     </div>
                   </div>
                   <div class="card-body">
-                    <span class="fs-5 text-primary"><i class="bi bi-play-fill"></i> {{ product.category }}</span>
-                      <h4 class="card-text text-dark my-2 link-hover">{{ product.title }}</h4>
+                    <span class="fs-5 text-primary">
+                      <i class="bi bi-play-fill"></i>
+                      {{ product.category }}
+                    </span>
+                    <h4 class="card-text text-dark my-2 link-hover">
+                      {{ product.title }}
+                    </h4>
                     <p>{{ product.feature }}</p>
                     <p class="fs-5 text-primary fw-bolder">
-                      <del style="color: rgb(196, 196, 196);"> NT${{ product.origin_price }}</del><br>
+                      <del style="color: rgb(196, 196, 196);">
+                        NT${{ product.origin_price }}
+                      </del>
+                      <br>
                       NT${{ product.price }}
                     </p>
                   </div>
@@ -121,26 +191,36 @@
               </RouterLink>
             </div>
           </div>
-          <!--not sort-->
+          <!--sort-->
           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3" v-else>
             <div class="col mt-4" v-for="product in sortProducts" :key="product.id">
               <RouterLink class="text-decoration-none" :to=" `/product/${product.id}`">
                 <div class="card h-100 mb-4 border-0 shadow-sm product-card-hover">
                   <div style="position: relative;">
                     <div>
-                      <span class="fs-5 text-dark bg-white ps-2 opacity-75" style="position: absolute; top: 15px; z-index: 2;">
+                      <span class="fs-5 text-dark bg-white ps-2 opacity-75"
+                        style="position: absolute; top: 15px; z-index: 2;">
                         <i class="bi bi-geo-alt-fill"></i>
                         {{ product.nation }}{{ product.area }}
                       </span>
-                      <img :src="product.imagesUrl[0]" style="height: 240px; z-index: 1;" class="card-img-top object-fit-cover" alt="product-img">
+                      <img :src="product.imagesUrl[0]" style="height: 240px; z-index: 1;"
+                        class="card-img-top object-fit-cover" alt="product-img">
                     </div>
                   </div>
                   <div class="card-body">
-                    <span class="fs-5 text-primary"><i class="bi bi-play-fill"></i> {{ product.category }}</span>
-                      <h4 class="card-text text-dark my-2 link-hover">{{ product.title }}</h4>
+                    <span class="fs-5 text-primary">
+                      <i class="bi bi-play-fill"></i>
+                      {{ product.category }}
+                    </span>
+                    <h4 class="card-text text-dark my-2 link-hover">
+                      {{ product.title }}
+                    </h4>
                     <p>{{ product.feature }}</p>
                     <p class="fs-5 text-primary fw-bolder">
-                      <del style="color: rgb(196, 196, 196);"> NT${{ product.origin_price }}</del><br>
+                      <del style="color: rgb(196, 196, 196);">
+                        NT${{ product.origin_price }}
+                      </del>
+                      <br>
                       NT${{ product.price }}
                     </p>
                   </div>
@@ -150,11 +230,13 @@
           </div>
         </div>
         <div class="d-flex justify-content-center mt-4 mt-xl-6">
-          <card-pagination :pagination="pagination" @emit-getlist="getProductsList" v-if="this.filterArea.length === 0 && this.category === ''"></card-pagination>
+          <card-pagination :pagination="pagination" @emit-getlist="getProductsList"
+            v-if="this.filterArea.length === 0 && this.category === ''">
+          </card-pagination>
         </div>
-      </div>
-    </div>
-  </div>
+      </main>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -253,34 +335,6 @@ export default {
       } else {
         this.sortBy = 'default'
       }
-    },
-    addToCart (product) { // 加入購物車
-      const item = {
-        data: {
-          product_id: product.id,
-          qty: 1
-        }
-      }
-      this.isLoading = true
-      this.$axios.post(`${VITE_API_URL}/api/${VITE_APIPATH}/cart`, item)
-        .then(res => {
-          this.$Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: '成功加入購物車',
-            showConfirmButton: false,
-            timer: 700
-          })
-        })
-        .catch(err => {
-          this.$Swal.fire({
-            icon: 'error',
-            title: err.response
-          })
-        })
-        .finally(() => {
-          this.isLoading = false
-        })
     },
     productSearch () { // 商品搜尋
       if (this.searchInput !== '') {

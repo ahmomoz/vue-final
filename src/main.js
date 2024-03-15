@@ -1,10 +1,10 @@
 import './assets/main.css'
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 import axios from 'axios'
 import App from './App.vue'
 import router from './router'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 
 // sweetalert套件
 import Swal from 'sweetalert2'
@@ -37,7 +37,6 @@ configure({
 setLocale('zh_TW') // 設定預設語系
 
 const app = createApp(App)
-app.use(createPinia())
 app.use(CKEditor)
 app.use(router)
 app.config.globalProperties.$axios = axios
@@ -45,5 +44,6 @@ app.config.globalProperties.$Swal = Swal
 app.component('VeeForm', Form)
 app.component('VeeField', Field)
 app.component('ErrorMessage', ErrorMessage)
+app.use(createPinia())
 
 app.mount('#app')

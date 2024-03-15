@@ -6,7 +6,7 @@ const routes = [
     component: () => import('@/views/user/UserLayoutView.vue'),
     children: [
       {
-        path: 'home',
+        path: '',
         component: () => import('@/views/user/UserHomeView.vue')
       },
       {
@@ -20,9 +20,29 @@ const routes = [
         component: () => import('@/views/user/UserProductView.vue')
       },
       {
+        path: 'articles',
+        name: '文章列表',
+        component: () => import('@/views/user/UserArticlesView.vue')
+      },
+      {
+        path: 'article/:id',
+        name: '文章詳細頁面',
+        component: () => import('@/views/user/UserArticleView.vue')
+      },
+      {
         path: 'cart',
         name: '購物車',
         component: () => import('@/views/user/UserCartView.vue')
+      },
+      {
+        path: 'booking',
+        name: '訂購人資訊',
+        component: () => import('@/views/user/UserBookingView.vue')
+      },
+      {
+        path: 'checkout-success',
+        name: '訂購確認',
+        component: () => import('@/views/user/UserCheckoutView.vue')
       }
     ]
   },
@@ -110,7 +130,10 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   linkActiveClass: 'active',
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    return { top: 0 } // 返回到顶部
+  }
 })
 
 export default router

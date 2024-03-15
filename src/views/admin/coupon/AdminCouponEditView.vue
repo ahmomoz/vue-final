@@ -9,11 +9,17 @@
             <h5 class="my-1">基本資訊</h5>
           </div>
           <div class="card-body">
-            <div class="mb-3">
-              <label for="title" class="form-label">*優惠券名稱</label>
-              <input id="title" type="text" class="form-control"
-              placeholder="請輸入優惠券名稱"
-              v-model="coupon.title">
+            <div class="row">
+              <div class="mb-3">
+                <label for="title" class="form-label">*優惠券名稱</label>
+                <input id="title" type="text" class="form-control"
+                placeholder="請輸入優惠券名稱"
+                v-model="coupon.title">
+              </div>
+              <div class="mb-3 col-md-6">
+                  <label for="due_date" class="form-label">*到期時間</label>
+                  <VueDatePicker v-model="currentDate"></VueDatePicker>
+              </div>
             </div>
 
             <div class="row">
@@ -26,7 +32,7 @@
               <div class="mb-3 col-md-6">
                   <label for="origin_price" class="form-label">*折扣數</label>
                   <input id="origin_price" type="number" min="0" class="form-control"
-                  placeholder="請輸入數字(例如:80%請填80)"
+                  placeholder="請輸入數字(例如:折20%請填80)"
                   v-model.number="coupon.percent">
               </div>
             </div>
@@ -65,6 +71,8 @@
 <script>
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
+import VueDatePicker from '@vuepic/vue-datepicker' // 日曆套件
+import '@vuepic/vue-datepicker/dist/main.css'
 const { VITE_API_URL, VITE_APIPATH } = import.meta.env
 
 export default {
@@ -74,7 +82,8 @@ export default {
       drag: false,
       coupon: {},
       currentPage: '',
-      isLoading: true // Loading效果
+      isLoading: true, // Loading效果
+      currentDate: new Date()
     }
   },
   methods: {
@@ -99,7 +108,8 @@ export default {
     addCoupon () { // 更新優惠券函式
       const currentTime = new Date()
       const currentTimeInSeconds = Math.floor(currentTime.getTime() / 1000)
-      this.coupon.due_date = currentTimeInSeconds
+      this.coupon.add_date = currentTimeInSeconds
+      this.coupon.due_date = Math.floor(this.currentDate.getTime() / 1000)
       const item = this.coupon
       this.isLoading = true
       this.$axios.put(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/coupon/${this.coupon.id}`, { data: item })
@@ -131,7 +141,8 @@ export default {
     this.getCouponList(this.$route.query.currentPage)
   },
   components: {
-    Loading
+    Loading,
+    VueDatePicker
   }
 }
 </script>

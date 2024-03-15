@@ -34,7 +34,7 @@
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="create_at" class="form-label">*建立時間</label>
-                    <VueDatePicker v-model="article.create_at"></VueDatePicker>
+                    <VueDatePicker v-model="currentDate"></VueDatePicker>
                 </div>
               </div>
 
@@ -93,7 +93,8 @@ export default {
           }
         }
       },
-      isLoading: false // Loading效果
+      isLoading: false, // Loading效果
+      currentDate: new Date()
     }
   },
   methods: {
@@ -112,9 +113,7 @@ export default {
         })
     },
     updateArticle () { // 更新文章函式
-      const currentTime = new Date()
-      const currentTimeInSeconds = Math.floor(currentTime.getTime() / 1000)
-      this.article.create_at = currentTimeInSeconds
+      this.article.create_at = Math.floor(this.currentDate.getTime() / 1000)
       const { id } = this.$route.params
       const item = this.article
       this.isLoading = true

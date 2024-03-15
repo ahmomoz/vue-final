@@ -57,7 +57,7 @@
                         {{ product.product.title }} x{{ product.qty }}<br>
                     </template>
                     </td>
-                  <td> NT${{ order.total }} </td>
+                  <td> NT${{ (order.total).toFixed(0) }} </td>
                   <td>
                   <span class="text-primary" v-if="order.is_paid">已付款</span>
                   <span v-else>未付款</span>

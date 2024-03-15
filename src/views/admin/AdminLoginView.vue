@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-4 mt-5">
         <h1 class="h3 mb-3 font-weight-normal">

@@ -34,7 +34,7 @@
                 </div>
                 <div class="mb-3 col-md-4">
                     <label for="create_at" class="form-label">*建立時間</label>
-                    <VueDatePicker v-model="article.create_at"></VueDatePicker>
+                    <VueDatePicker v-model="currentDate"></VueDatePicker>
                 </div>
               </div>
 
@@ -93,14 +93,13 @@ export default {
           }
         }
       },
-      isLoading: true // Loading效果
+      isLoading: true, // Loading效果
+      currentDate: new Date()
     }
   },
   methods: {
     addArticle () { // 新增文章函式
-      const currentTime = new Date()
-      const currentTimeInSeconds = Math.floor(currentTime.getTime() / 1000)
-      this.article.create_at = currentTimeInSeconds
+      this.article.create_at = Math.floor(this.currentDate.getTime() / 1000)
       // 檢查是否有勾選，若未勾選，設置為 false
       this.article.isPublic = this.article.isPublic || false
       const item = this.article

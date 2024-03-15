@@ -43,7 +43,7 @@
                 </template>
             </div>
             <div class="card-footer">
-                <p class="text-end fs-5 m-0">總金額 NT$ {{ order.total }}  </p>
+                <p class="text-end fs-5 m-0">總金額 NT$ {{ (order.total.toFixed(0)) }}  </p>
             </div>
         </div>
         <!--訂購人資訊區塊-->

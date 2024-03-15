@@ -85,6 +85,21 @@
 
             <div class="row">
               <div class="mb-3 col-md-6">
+                  <label for="address" class="form-label">*地址</label>
+                  <input id="address" type="text" class="form-control"
+                  placeholder="請輸入地區"
+                  v-model="product.address">
+              </div>
+              <div class="mb-3 col-md-6">
+                  <label for="addressEmbedCode" class="form-label">*地址嵌入碼</label>
+                  <input id="addressEmbedCode" type="text" class="form-control"
+                  placeholder="請輸入縣市"
+                  v-model="product.addressEmbedCode">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="mb-3 col-md-6">
                   <label for="category" class="form-label">*分類</label>
                   <input id="category" type="text" class="form-control"
                   placeholder="請輸入分類"
