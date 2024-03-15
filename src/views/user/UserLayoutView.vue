@@ -46,7 +46,9 @@
     <!--footer-->
     <ul class="list-unstyled d-lg-flex justify-content-lg-around">
       <li class="p-3 text-center">
-        <RouterLink to="/"><img style="width: 75%;" class="object-fit" src="@/assets/images/logo/logo.png" alt="logo"></RouterLink>
+        <RouterLink to="/"><img style="width: 75%;" class="object-fit"
+          src="@/assets/images/logo/logo.png" alt="logo">
+        </RouterLink>
       </li>
       <li class="p-3">
         <p class="h5 link-gray">聯絡我們</p>

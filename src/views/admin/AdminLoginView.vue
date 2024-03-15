@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row justify-content-center">
-      <div class="col-4 mt-5">
+      <div class="col-lg-4 mt-5">
         <h1 class="h3 mb-3 font-weight-normal">
         請先登入
         </h1>
@@ -20,9 +20,14 @@
             <label for="password">Password</label>
           </div>
           <!--使用@click綁定點擊觸發函式，type需改成button避免傳出表單資料-->
-          <button @click="login" class="btn btn-lg btn-primary w-100 mt-3" type="button">
-            登入
-          </button>
+          <div class="d-flex">
+            <button class="btn btn-lg btn-dark w-100 mt-3" type="button" @click="goPrePage">
+              返回首頁
+            </button>
+            <button class="btn btn-lg btn-primary w-100 mt-3 ms-3" type="button" @click="login">
+              登入
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -56,6 +61,9 @@ export default {
       } else {
         this.$Swal.fire('請填入正確資料')
       }
+    },
+    goPrePage () {
+      this.$router.push('/')
     }
   }
 }
