@@ -3,7 +3,7 @@
     <div class="text-center mt-5">
       <img class="img-fluid" src="@/assets/images/cart-step/step3.png" alt="step-img">
     </div>
-    <div class="row text-center">
+    <div class="row text-center" data-aos="fade-up">
       <div class="py-5 col-md-12">
         <h2>已成功送出訂單</h2>
         <p>非常感謝您的訂購，有任何問題歡迎來信詢問。</p>

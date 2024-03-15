@@ -200,7 +200,7 @@ export default {
             showConfirmButton: false,
             timer: 700
           })
-          this.$router.push('/admin/products')
+          this.$router.push('/dashboard/products')
         })
         .catch(err => {
           this.isLoading = false

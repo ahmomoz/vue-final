@@ -6,7 +6,8 @@
     <!--Header區塊-->
     <div class="row d-flex justify-content-between my-lg-5">
       <div class="col-lg-2">
-        <h1 class="lh-base fs-1 text-gray letter-spacing-7 text-vrl pt-7 py-lg-7 mx-auto">
+        <h1 class="lh-base fs-1 text-gray letter-spacing-7 text-vrl pt-7 py-lg-7 mx-auto"
+          data-aos="zoom-out">
           和<span class="text-primary">小動物</span>們相遇，<br>
           &nbsp;&nbsp;&nbsp;&nbsp;來場<span class="text-primary">治癒身心</span>的輕旅行。
         </h1>
@@ -14,10 +15,11 @@
       <div class="col-lg-10">
         <div class="text-end">
           <RouterLink to="/">
-            <img class="img-fluid" src="@/assets/images/logo/logo.png" alt="logo">
+            <img class="img-fluid" src="@/assets/images/logo/logo.png" alt="logo" data-aos="zoom-out">
           </RouterLink>
         </div>
         <swiper
+          data-aos="zoom-out"
           class="mySwiper"
           :spaceBetween="30"
           :effect="'fade'"
@@ -42,7 +44,7 @@
   <section class="container-fluid about-fixed-background shadow-bottom rounded-5">
     <!--About區塊-->
     <div class="row mt-5 py-lg-7 gradient-border">
-      <div class="col py-7 py-lg-10">
+      <div class="col py-7 py-lg-10" data-aos="fade-up">
         <p class="fs-3 text-gray text-center m-0">About</p>
         <h2 class="lh-base fs-1 text-gray text-center">
           <img src="@/assets/images/image/leaf-primary.png" alt="logo" class="img-fluid">
@@ -59,7 +61,7 @@
       </div>
     </div>
   </section>
-  <section class="container mt-8 mt-lg-10 p-lg-0">
+  <section class="container mt-8 mt-lg-10 p-lg-0" data-aos="fade-up">
     <!--News區塊-->
     <div class="row">
       <div class="col-lg-4">
@@ -80,18 +82,18 @@
             <p class="lh-lg fs-4 text-gray">{{ article.title }}</p>
           </li>
         </ul>
-      <div class="d-flex align-items-center justify-content-end">
-        <RouterLink class="text-decoration-none" to="/articles">
-          <p class="text-dark my-3 link-hover">
-            view all
-            <i class="bi bi-arrow-right-short"></i>
-          </p>
-        </RouterLink>
-      </div>
+        <div class="d-flex align-items-center justify-content-end">
+          <RouterLink class="text-decoration-none" to="/articles">
+            <p class="text-dark my-3 link-hover">
+              view all
+              <i class="bi bi-arrow-right-short"></i>
+            </p>
+          </RouterLink>
+        </div>
       </div>
     </div>
   </section>
-  <section class="container-fluid mt-6 mt-lg-7 p-lg-0">
+  <section class="container-fluid mt-6 mt-lg-7 px-lg-1" data-aos="fade-up">
     <!--Category區塊-->
     <p class="fs-3 text-gray text-center m-0">Category</p>
     <h2 class="lh-base fs-1 text-gray text-center">
@@ -108,7 +110,7 @@
             </div>
             <div class="text-center py-4 p-lg-5 bg-light">
               <h3 class="text-gray fs-2 fw-bolder m-0">動物園</h3>
-              <p class="text-gray fs-5 mt-4">
+              <p class="text-gray mt-4">
                 有各式各樣的動物可供觀賞。<br>
                 透過展示動物、舉辦教育活動和培訓，提升對動物保育的認識。</p>
             </div>
@@ -123,7 +125,7 @@
             </div>
             <div class="text-center py-4 p-lg-5 bg-light">
               <h3 class="text-gray fs-2 fw-bolder m-0">動物村 / 動物聚落</h3>
-              <p class="text-gray fs-5 mt-4">
+              <p class="text-gray mt-4">
                 通常以單一動物為主題，提供與動物近距離互動的機會。<br>
                 透過遊覽和互動體驗，讓遊客更深入地了解動物的生活和行為。</p>
             </div>
@@ -140,7 +142,7 @@
             </div>
             <div class="text-center py-4 p-lg-5 bg-light">
               <h3 class="text-gray fs-2 fw-bolder m-0">動物農場</h3>
-              <p class="text-gray fs-5 mt-4">
+              <p class="text-gray mt-4">
                 結合農業和觀光，<br>
                 提供小動物觀賞和參與農業活動的機會。<br>
                 可以體驗農場活動，同時欣賞可愛的小動物。</p>
@@ -156,7 +158,7 @@
             </div>
             <div class="text-center py-4 p-lg-5 bg-light">
               <h3 class="text-gray fs-2 fw-bolder m-0">水族館</h3>
-              <p class="text-gray fs-5 mt-4">
+              <p class="text-gray mt-4">
                 專門展示各種水生生物和水域生態的場所。<br>
                 是一個可以了解水生生物、<br>
                 水域生態系統和海洋保護的地方。</p>
@@ -172,7 +174,7 @@
             </div>
             <div class="text-center py-4 p-lg-5 bg-light">
               <h3 class="text-gray fs-2 fw-bolder m-0">鳥園</h3>
-              <p class="text-gray fs-5 mt-4">
+              <p class="text-gray mt-4">
                 專門保護、展示各種鳥類的場所。<br>
                 可以在這裡近距離觀察各種鳥類，<br>
                 了解它們的生活習性。</p>
@@ -181,7 +183,7 @@
         </div>
     </div>
   </section>
-  <section class="container my-7 p-lg-0">
+  <section class="container my-7 p-lg-0" data-aos="fade-up">
     <!--Products區塊-->
     <p class="fs-3 text-gray text-center m-0">Products</p>
     <h2 class="lh-base fs-1 text-gray text-center">

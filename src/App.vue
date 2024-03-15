@@ -3,7 +3,20 @@
 </template>
 
 <script>
-export default {}
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+export default {
+  data () {
+    return {
+    }
+  },
+  mounted () {
+    AOS.init()
+    AOS.init({
+      duration: 1800
+    })
+  }
+}
 </script>
 
 <style lang="scss">

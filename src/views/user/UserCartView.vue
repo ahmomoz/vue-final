@@ -7,7 +7,7 @@
       <div class="text-center">
         <img class="img-fluid" src="@/assets/images/cart-step/step1.png" alt="step-img">
       </div>
-      <div class="card" v-if="cartList.length>0">
+      <div class="card" v-if="cartList.length>0" data-aos="fade-up">
         <!--購物車-->
         <div class="card-header bg-white d-flex justify-content-between py-4 py-xl-5">
           <h2 class="my-auto">

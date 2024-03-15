@@ -14,7 +14,7 @@
         </li>
       </ol>
     </nav>
-    <section>
+    <section data-aos="fade-up">
       <p class="fs-xl-3 text-gray my-0 ms-5">Articles</p>
       <h2 class="lh-base fs-xl-1 text-gray">
         <img src="@/assets/images/image/leaf-primary.png" alt="logo" class="img-fluid">

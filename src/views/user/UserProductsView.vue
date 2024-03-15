@@ -155,7 +155,8 @@
           </div>
           <!--商品卡片-->
           <!--not sort-->
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3" v-if="sortBy==='default'">
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"
+            v-if="sortBy==='default'" data-aos="fade-up">
             <div class="col mt-4" v-for="product in products" :key="product.id">
               <RouterLink class="text-decoration-none" :to=" `/product/${product.id}`">
                 <div class="card h-100 mb-4 border-0 shadow-sm product-card-hover">
@@ -192,7 +193,8 @@
             </div>
           </div>
           <!--sort-->
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3" v-else>
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3" v-else
+            data-aos="fade-up">
             <div class="col mt-4" v-for="product in sortProducts" :key="product.id">
               <RouterLink class="text-decoration-none" :to=" `/product/${product.id}`">
                 <div class="card h-100 mb-4 border-0 shadow-sm product-card-hover">

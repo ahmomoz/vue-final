@@ -6,7 +6,8 @@
     <div class="text-center mt-5">
       <img class="img-fluid" src="@/assets/images/cart-step/step2.png" alt="step-img">
     </div>
-    <div class="row flex-row-reverse justify-content-center pb-5" v-if="cartList.length>0">
+    <div class="row flex-row-reverse justify-content-center pb-5"
+      v-if="cartList.length>0" data-aos="fade-up">
       <div class="col-md-4">
         <div class="border bg-white p-4 mb-4">
           <div class="d-flex mt-2" v-for="product in cartList" :key="product.id">

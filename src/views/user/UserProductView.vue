@@ -15,7 +15,7 @@
         </li>
       </ol>
     </nav>
-    <section class="row mt-3">
+    <section class="row mt-3" data-aos="fade-up">
       <div class="col-xl-12">
         <div class="mb-2">
           <h1>{{ product.nation }}｜{{ product.title }}</h1>
@@ -77,7 +77,7 @@
         </div>
       </div>
     </section>
-    <section class="row flex-column-reverse flex-xl-row">
+    <section class="row flex-column-reverse flex-xl-row" data-aos="fade-up">
       <div class="col-12 col-xl-8 mt-xl-3">
         <div class="d-xl-flex ps-1 py-3 mb-xl-3">
           <div class="mx-xl-3 me-xl-5">
@@ -169,7 +169,7 @@
         </div>
       </div>
     </section>
-    <section class="row mt-5">
+    <section class="row mt-5" data-aos="fade-up">
       <!-- 推薦商品 -->
       <div class="d-flex my-4">
         <i class="fs-4 text-primary me-2 bi bi-stars"></i>
