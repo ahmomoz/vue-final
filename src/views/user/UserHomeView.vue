@@ -5,14 +5,14 @@
   <header class="container-fluid">
     <!--Header區塊-->
     <div class="row d-flex justify-content-between my-lg-5">
-      <div class="col-lg-2">
+      <div class="col-xl-2">
         <h1 class="lh-base fs-1 text-gray letter-spacing-7 text-vrl pt-7 py-lg-7 mx-auto"
           data-aos="zoom-out">
           和<span class="text-primary">小動物</span>們相遇，<br>
           &nbsp;&nbsp;&nbsp;&nbsp;來場<span class="text-primary">治癒身心</span>的輕旅行。
         </h1>
       </div>
-      <div class="col-lg-10">
+      <div class="col-xl-10">
         <div class="text-end">
           <RouterLink to="/">
             <img class="img-fluid" src="@/assets/images/logo/logo.png" alt="logo" data-aos="zoom-out">
@@ -34,9 +34,9 @@
           }"
           :modules="modules"
         >
-          <swiper-slide><img src="@/assets/images/banner/indexBanner-1.jpg" alt="banner"></swiper-slide>
-          <swiper-slide><img src="@/assets/images/banner/indexBanner-4.jpg" alt="banner"></swiper-slide>
-          <swiper-slide><img src="@/assets/images/banner/indexBanner-5.jpg" alt="banner"></swiper-slide>
+        <swiper-slide><img src="@/assets/images/banner/indexBanner-1.jpg" alt="banner"></swiper-slide>
+        <swiper-slide><img src="@/assets/images/banner/indexBanner-4.jpg" alt="banner"></swiper-slide>
+        <swiper-slide><img src="@/assets/images/banner/indexBanner-5.jpg" alt="banner"></swiper-slide>
         </swiper>
       </div>
     </div>
@@ -61,10 +61,10 @@
       </div>
     </div>
   </section>
-  <section class="container mt-8 mt-lg-10 p-lg-0" data-aos="fade-up">
+  <section class="container mt-8 mt-lg-10 px-5 p-xl-0" data-aos="fade-up">
     <!--News區塊-->
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-xl-4">
         <div class="text-gray text-center">
           <p class="fs-3 m-0">News</p>
           <h2 class="lh-base fs-1 text-gray">
@@ -73,7 +73,7 @@
           </h2>
         </div>
       </div>
-      <div class="col-lg-8">
+      <div class="col-xl-8">
         <ul class="list-group list-group-flush my-5 my-lg-0">
           <li class="list-group-item mt-2 py-0 article-hover"
             v-for="article in articles.slice(0, 6)" :key="article.id">
@@ -93,7 +93,7 @@
       </div>
     </div>
   </section>
-  <section class="container-fluid mt-6 mt-lg-7 px-lg-1" data-aos="fade-up">
+  <section class="container-fluid mt-6 mt-lg-7 px-3" data-aos="fade-up">
     <!--Category區塊-->
     <p class="fs-3 text-gray text-center m-0">Category</p>
     <h2 class="lh-base fs-1 text-gray text-center">
@@ -183,7 +183,7 @@
         </div>
     </div>
   </section>
-  <section class="container my-7 p-lg-0" data-aos="fade-up">
+  <section class="container my-7 px-3" data-aos="fade-up">
     <!--Products區塊-->
     <p class="fs-3 text-gray text-center m-0">Products</p>
     <h2 class="lh-base fs-1 text-gray text-center">
