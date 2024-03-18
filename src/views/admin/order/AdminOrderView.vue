@@ -49,8 +49,8 @@
         <!--訂購人資訊區塊-->
         <div class="row card mt-4 shadow-sm">
           <div class="card-header">
-                <h5 class="my-1">收件人資訊</h5>
-            </div>
+              <h5 class="my-1">收件人資訊</h5>
+          </div>
           <div class="card-body">
             <div class="mb-3">
                     <label for="name" class="form-label fw-bold">姓名</label>

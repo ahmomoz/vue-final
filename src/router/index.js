@@ -40,9 +40,14 @@ const routes = [
         component: () => import('@/views/user/UserBookingView.vue')
       },
       {
-        path: 'checkout-success',
+        path: '/checkout/:id',
         name: '訂購確認',
         component: () => import('@/views/user/UserCheckoutView.vue')
+      },
+      {
+        path: 'checkout-success',
+        name: '訂購完成訊息',
+        component: () => import('@/views/user/UserOrderMessege.vue')
       }
     ]
   },

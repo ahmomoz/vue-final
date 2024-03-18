@@ -87,7 +87,7 @@
               返回上一步
             </RouterLink>
             <button type="submit" class="btn btn-primary py-3 px-5 rounded-0"
-              @click="addOrder" :disabled="isFormIncomplete">
+              @click="addOrder(form)" :disabled="isFormIncomplete">
               送出訂單
             </button>
           </div>
@@ -112,7 +112,6 @@ import cartStore from '@/stores/cartStore'
 // loading
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
-const { VITE_API_URL, VITE_APIPATH } = import.meta.env
 
 export default {
   data () {
@@ -142,47 +141,7 @@ export default {
   },
   methods: {
     ...mapActions(cartStore, ['getCartList']),
-    addOrder () { // 送出訂單
-      if (this.cartList.length > 0) {
-        const currentTime = new Date()
-        const currentTimeString = currentTime.toISOString()
-        this.form.user.date = currentTimeString
-        const item = this.form
-        this.isLoading = true
-        this.$axios.post(`${VITE_API_URL}/api/${VITE_APIPATH}/order`, { data: item })
-          .then(res => {
-            this.$Swal.fire({
-              title: '訂單送出成功',
-              icon: 'success'
-            })
-            this.form =
-              {
-                user: {
-                  email: '',
-                  name: '',
-                  tel: '',
-                  address: ''
-                },
-                message: ''
-              }
-            this.$router.push('/checkout-success')
-          })
-          .catch(err => {
-            this.$Swal.fire({
-              icon: 'error',
-              title: err.response.data.message
-            })
-          })
-          .finally(() => {
-            this.isLoading = false
-          })
-      } else {
-        this.$Swal.fire({
-          icon: 'error',
-          title: '購物車不得為空'
-        })
-      }
-    }
+    ...mapActions(cartStore, ['addOrder'])
   },
   mounted () {
     this.getCartList()
@@ -193,5 +152,5 @@ export default {
 }
 </script>
 
-  <style scoped>
-  </style>
+<style scoped>
+</style>

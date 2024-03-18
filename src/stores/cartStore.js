@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import router from '@/router'
 // loading
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
@@ -14,7 +15,18 @@ export default defineStore('cartStore', {
     total: 0,
     cartList: {},
     cartListTotalQty: '',
-    isLoading: true // Loading效果
+    isLoading: true, // Loading效果
+    form: { // 送出訂單資訊用表格資料
+      user: {
+        email: '',
+        name: '',
+        tel: '',
+        address: '',
+        date: ''
+      },
+      message: ''
+    },
+    orderID: ''
   }),
   actions: {
     getCartList () { // 取得購物車產品資料
@@ -163,6 +175,37 @@ export default defineStore('cartStore', {
             })
         }
       })
+    },
+    addOrder (form) { // 送出訂單
+      const currentTime = new Date()
+      const currentTimeString = currentTime.toISOString()
+      form.user.date = currentTimeString
+      const item = form
+      this.isLoading = true
+      axios.post(`${VITE_API_URL}/api/${VITE_APIPATH}/order`, { data: item })
+        .then(res => {
+          this.form =
+              {
+                user: {
+                  email: '',
+                  name: '',
+                  tel: '',
+                  address: ''
+                },
+                message: ''
+              }
+          this.orderID = res.data.orderId
+          router.push(`/checkout/${this.orderID}`)
+        })
+        .catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: err.response.data.message
+          })
+        })
+        .finally(() => {
+          this.isLoading = false
+        })
     }
   },
   components: {
