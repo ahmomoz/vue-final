@@ -53,8 +53,8 @@
           <td> {{ product.category }} </td>
           <td> {{ product.nation }} </td>
           <td> {{ product.title }} </td>
-          <td> NT${{ product.price }} <br>
-            <del style="color: rgb(196, 196, 196);"> NT${{ product.origin_price }} </del></td>
+          <td> NT${{ formatPrice(product.price) }} <br>
+            <del style="color: rgb(196, 196, 196);"> NT${{ formatPrice(product.origin_price) }} </del></td>
           <td>
             <span class="text-primary" v-if="product.is_enabled">上架中</span>
             <span v-else>未上架</span>
@@ -80,8 +80,8 @@
           <td> {{ product.category }} </td>
           <td> {{ product.nation }} </td>
           <td> {{ product.title }} </td>
-          <td> NT${{ product.price }} <br>
-            <del style="color: rgb(196, 196, 196);"> NT${{ product.origin_price }} </del></td>
+          <td> NT${{ formatPrice(product.price) }} <br>
+            <del style="color: rgb(196, 196, 196);"> NT${{ formatPrice(product.origin_price) }} </del></td>
           <td>
             <span class="text-success" v-if="product.is_enabled">上架中</span>
             <span v-else>未上架</span>
@@ -176,6 +176,9 @@ export default {
     },
     productSearch () {
       this.products = this.productsFilteredResults
+    },
+    formatPrice (price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
   },
   computed: {

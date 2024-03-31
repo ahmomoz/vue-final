@@ -15,7 +15,7 @@
         <dt class="col-sm-3 text-truncate text-primary">訂單編號</dt>
         <dd class="col-sm-9 text-primary">{{ order.create_at }}</dd>
         <dt class="col-sm-3 text-truncate text-primary">訂單金額</dt>
-        <dd class="col-sm-9 text-primary">NT ${{ order.total }}</dd>
+        <dd class="col-sm-9 text-primary">NT ${{ formatPrice(order.total) }}</dd>
         <dt class="col-sm-3 text-truncate text-primary">訂單狀態</dt>
         <dd class="col-sm-9 text-primary" v-if="order.is_paid">訂單已付款完成</dd>
         <dd class="col-sm-9 text-primary" v-else>訂單尚未付款</dd>
@@ -35,13 +35,13 @@
                 {{ product.product.title }} x {{ product.qty }}
               </p>
               <p class="text-end mx-2 my-auto">
-                NT$ {{ product.product.price }}
+                NT$ {{ formatPrice(product.product.price) }}
               </p>
             </div>
           </template>
         </div>
         <div class="card-footer">
-          <p class="text-end fs-5 m-0">總金額 NT$ {{ order.total.toFixed(0) }}  </p>
+          <p class="text-end fs-5 m-0">總金額 NT$ {{ formatPrice(order.total.toFixed(0)) }}  </p>
         </div>
       </div>
       <div class="row card mt-4 shadow-sm">
@@ -185,6 +185,9 @@ export default {
     },
     formatDateString (date) {
       return moment(date).format('YYYY-MM-DD HH:mm:ss')
+    },
+    formatPrice (price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
   },
   created () {

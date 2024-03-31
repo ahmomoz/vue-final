@@ -204,8 +204,8 @@
               <h4 class="card-text text-dark my-2">{{ product.title }}</h4>
               <p>{{ product.feature }}</p>
               <p class="fs-5 text-primary fw-bolder">
-                <del style="color: rgb(196, 196, 196);">NT${{ product.origin_price }}</del><br>
-                NT${{ product.price }}
+                <del style="color: rgb(196, 196, 196);">NT${{ formatPrice(product.origin_price) }}</del><br>
+                NT${{ formatPrice(product.price) }}
               </p>
             </div>
           </div>
@@ -273,6 +273,9 @@ export default {
     },
     formatDateString (date) {
       return moment.unix(date).format('YYYY-MM-DD')
+    },
+    formatPrice (price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
   },
   components: {

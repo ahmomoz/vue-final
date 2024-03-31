@@ -34,7 +34,7 @@
                   <img :src="product.product.imagesUrl[0]" alt="product-img" style="width: 80px;">
                   <p class="ms-md-2">{{ product.product.title }}</p>
                 </td>
-                <td>${{ product.product.price }}</td>
+                <td>${{ formatPrice(product.product.price) }}</td>
                 <td style="width: 200px;">
                   <div class="input-group input-group-sm">
                     <input :min="1" type="number" class="form-control"
@@ -45,7 +45,7 @@
                     </span>
                   </div>
                 </td>
-                <td class="text-end">${{ (product.final_total).toFixed(0) }}</td>
+                <td class="text-end">${{ formatPrice((product.final_total).toFixed(0)) }}</td>
                 <td>
                   <button class="btn btn-sm btn-outline-danger text-end" type="button"
                     @click="deleteProduct(product)">
@@ -72,7 +72,7 @@
           <div class="text-end">
             <p class="m-0">總計金額</p>
             <p class="fs-2 text-primary fw-bolder m-0">
-              NT$ {{ (final_total).toFixed(0) }}
+              NT$ {{ formatPrice((final_total).toFixed(0)) }}
             </p>
           </div>
           <RouterLink to="/booking" class="btn btn-primary fs-5 text-white ms-3 p-3 shadow-sm">
@@ -117,7 +117,10 @@ export default {
     ...mapActions(cartStore, ['updateQty']),
     ...mapActions(cartStore, ['deleteProduct']),
     ...mapActions(cartStore, ['deleteCart']),
-    ...mapActions(cartStore, ['useCoupon'])
+    ...mapActions(cartStore, ['useCoupon']),
+    formatPrice (price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
   },
   mounted () {
     this.getCartList()

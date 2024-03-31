@@ -253,6 +253,9 @@ export default {
     },
     goBack () {
       this.$router.go(-1)
+    },
+    formatPrice (price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
   },
   created () {

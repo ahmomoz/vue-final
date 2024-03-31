@@ -84,6 +84,26 @@ export default {
       editor: ClassicEditor,
       editorData: '',
       editorConfig: {
+        toolbar: {
+          items: [
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            'link',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'outdent',
+            'indent',
+            '|',
+            'blockQuote',
+            'insertTable',
+            'mediaEmbed',
+            'undo',
+            'redo'
+          ]
+        },
         dataProcessor: {
           writer: {
             enter: '<br>'

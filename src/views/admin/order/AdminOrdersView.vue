@@ -59,7 +59,7 @@
                     {{ product.product.title }} x{{ product.qty }}<br>
                   </template>
                 </td>
-                <td> NT${{ (order.total).toFixed(0) }} </td>
+                <td> NT${{ formatPrice((order.total).toFixed(0)) }} </td>
                 <td>
                   <span class="text-primary" v-if="order.is_paid">已付款</span>
                   <span v-else>未付款</span>
@@ -196,6 +196,9 @@ export default {
     },
     formatDateString (date) {
       return moment(date).format('YYYY-MM-DD HH:mm:ss')
+    },
+    formatPrice (price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
   },
   computed: {

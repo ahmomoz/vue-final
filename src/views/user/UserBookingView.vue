@@ -16,7 +16,7 @@
             <div class="w-100">
               <div class="d-flex justify-content-between">
                 <p class="mb-0 fw-bold">{{ product.product.title }}</p>
-                <p class="mb-0">NT${{ product.product.price }}</p>
+                <p class="mb-0">NT${{ formatPrice(product.product.price) }}</p>
               </div>
               <p class="mb-0 fw-bold">x{{ product.qty }}</p>
             </div>
@@ -25,19 +25,19 @@
             <tbody>
               <tr>
                 <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">小計</th>
-                <td class="text-end border-0 px-0 pt-4">NT${{ (total).toFixed(0) }}</td>
+                <td class="text-end border-0 px-0 pt-4">NT${{ formatPrice((total).toFixed(0)) }}</td>
               </tr>
               <tr>
                 <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">折扣金額</th>
                 <td class="text-end border-0 px-0 pt-0 pb-4">
-                  -NT${{ (final_total - total).toFixed(0) }}
+                  -NT${{ formatPrice((final_total - total).toFixed(0)) }}
                 </td>
               </tr>
             </tbody>
           </table>
           <div class="d-flex justify-content-between mt-4">
             <p class="mb-0 h4 fw-bold">總計金額</p>
-            <p class="mb-0 h4 fw-bold">NT${{ (final_total).toFixed(0) }}</p>
+            <p class="mb-0 h4 fw-bold">NT${{ formatPrice((final_total).toFixed(0)) }}</p>
           </div>
         </div>
       </div>
@@ -139,7 +139,10 @@ export default {
   },
   methods: {
     ...mapActions(cartStore, ['getCartList']),
-    ...mapActions(cartStore, ['addOrder'])
+    ...mapActions(cartStore, ['addOrder']),
+    formatPrice (price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
   },
   mounted () {
     this.getCartList()

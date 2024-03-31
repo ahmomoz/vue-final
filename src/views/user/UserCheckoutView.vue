@@ -15,7 +15,7 @@
             <div class="w-100">
               <div class="d-flex justify-content-between">
                 <p class="mb-0 fw-bold">{{ product.product.title }}</p>
-                <p class="mb-0">NT${{ product.product.price }}</p>
+                <p class="mb-0">NT${{ formatPrice(product.product.price) }}</p>
               </div>
               <p class="mb-0 fw-bold">x{{ product.qty }}</p>
             </div>
@@ -23,7 +23,7 @@
           <hr>
           <div class="d-flex justify-content-between mt-4">
             <p class="mb-0 h4 fw-bold">總計金額</p>
-            <p class="mb-0 h4 fw-bold">NT${{ (total).toFixed(0) }}</p>
+            <p class="mb-0 h4 fw-bold">NT${{ formatPrice((total).toFixed(0)) }}</p>
           </div>
         </div>
         <button type="button" class="btn btn-primary py-3 px-5 w-100 rounded-0"
@@ -133,6 +133,9 @@ export default {
         .finally(() => {
           this.isLoading = false
         })
+    },
+    formatPrice (price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
   },
   mounted () {
