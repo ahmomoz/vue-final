@@ -4,7 +4,6 @@
   </loading>
   <main class="bg-white py-8 px-3 px-xl-10">
     <nav class="mb-xl-5" aria-label="breadcrumb">
-      <!--麵包屑-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <RouterLink class="text-decoration-none" to="/" exact>首頁</RouterLink>
@@ -46,7 +45,6 @@
 <script>
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
-// 日期轉換
 import moment from 'moment'
 
 const { VITE_API_URL, VITE_APIPATH } = import.meta.env
@@ -56,11 +54,11 @@ export default {
     return {
       article: [],
       pagination: {},
-      isLoading: true // Loading效果
+      isLoading: true
     }
   },
   methods: {
-    getArticleList () { // 取得單一文章資料
+    getArticleList () {
       const { id } = this.$route.params
       this.isLoading = true
       this.$axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/article/${id}`)
@@ -77,7 +75,7 @@ export default {
           this.isLoading = false
         })
     },
-    formatDateString (date) { // 日期轉換
+    formatDateString (date) {
       return moment.unix(date).format('YYYY-MM-DD')
     }
   },

@@ -7,19 +7,20 @@
         </h1>
         <form id="form" class="form-signin">
           <div class="form-floating mb-3">
-            <!--v-model綁定輸入帳號的值，且按下enter時會觸發onclick函式-->
-            <input v-model="user.username" @keyup.enter="login" type="email" class="form-control" id="username"
-              placeholder="name@example.com" required autofocus>
+            <input type="email" class="form-control" id="username"
+              placeholder="name@example.com"
+              v-model="user.username" @keyup.enter="login"
+              required autofocus>
             <label for="username">Email address</label>
           </div>
 
           <div class="form-floating">
-            <!--v-model綁定輸入密碼的值，且按下enter時會觸發onclick函式-->
-            <input v-model="user.password" @keyup.enter="login" type="password" class="form-control" id="password"
-              placeholder="Password" required >
+            <input type="password" class="form-control" id="password"
+              placeholder="Password"
+              v-model="user.password" @keyup.enter="login"
+              required >
             <label for="password">Password</label>
           </div>
-          <!--使用@click綁定點擊觸發函式，type需改成button避免傳出表單資料-->
           <div class="d-flex">
             <button class="btn btn-lg btn-dark w-100 mt-3" type="button" @click="goPrePage">
               返回首頁
@@ -47,7 +48,6 @@ export default {
   methods: {
     login () {
       if (this.user.username && this.user.password) {
-        // 發送 API 至遠端並登入（並儲存 Token）
         this.$axios.post(`${import.meta.env.VITE_API_URL}/admin/signin`, this.user)
           .then(res => {
             const { token, expired } = res.data

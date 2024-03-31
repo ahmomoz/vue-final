@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-// loading
+
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 
@@ -9,14 +9,16 @@ const { VITE_API_URL, VITE_APIPATH } = import.meta.env
 
 export default defineStore('productStore', {
   state: () => ({
-    products: [], // 所有產品
-    product: { // 單一產品
-      imagesUrl: []
+    products: [],
+    product: {
+      imagesUrl: [],
+      origin_price: 0,
+      price: 0
     },
-    isLoading: true // Loading效果
+    isLoading: true
   }),
   actions: {
-    getProductList (productId) { // 取得單一產品資料
+    getProductList (productId) {
       this.isLoading = true
       axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/product/${productId}`)
         .then(res => {
@@ -32,7 +34,7 @@ export default defineStore('productStore', {
           this.isLoading = false
         })
     },
-    getAllProductsList () { // 取得產品資料
+    getAllProductsList () {
       this.isLoading = true
       axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/products/all`)
         .then(res => {
@@ -47,6 +49,9 @@ export default defineStore('productStore', {
         .finally(() => {
           this.isLoading = false
         })
+    },
+    formatPrice (price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
   },
   components: {

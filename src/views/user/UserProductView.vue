@@ -2,9 +2,8 @@
   <loading v-if="isLoading" :active="isLoading" :can-cancel="false">
     <img style="width: 200px;" src="@/assets/images/image/loading-img2.gif" alt="to-top-btn">
   </loading>
-  <main class="container-fluid pt-6 pb-5 py-xl-6 px-3 px-xl-10">
+  <main class="container-fluid pt-6 pb-5 py-xl-6 px-3 px-xl-5 px-xxl-8">
     <nav class="mb-3 mb-xl-4" aria-label="breadcrumb">
-      <!--麵包屑-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink class="text-decoration-none" to="/" exact>首頁</RouterLink></li>
         <li class="breadcrumb-item active" aria-current="page">
@@ -43,7 +42,6 @@
             }"
             :effect="'fade'"
             :spaceBetween="10"
-            :loop="true"
             :navigation="true"
             :thumbs="{ swiper: this.thumbsSwiper }"
             :modules="modules"
@@ -60,7 +58,8 @@
           <swiper
             @swiper="setThumbsSwiper"
             :spaceBetween="10"
-            :slidesPerView="3"
+            :slidesPerView="5"
+            :slidesPerGroup="5"
             :freeMode="true"
             :watchSlidesProgress="true"
             :modules="modules"
@@ -79,7 +78,7 @@
     </section>
     <section class="row flex-column-reverse flex-xl-row" data-aos="fade-up">
       <div class="col-12 col-xl-8 mt-xl-3">
-        <div class="d-xl-flex ps-1 py-3 mb-xl-3">
+        <div class="fs-5 d-xl-flex ps-1 py-3 mb-xl-3">
           <div class="mx-xl-3 me-xl-5">
             <i class="bi bi-coin"></i>
             時限內可免費取消
@@ -91,24 +90,22 @@
         </div>
         <hr>
         <div class="py-3">
-          <p class="white-space-pre-line my-auto">
+          <p class="fs-5 white-space-pre-line my-auto">
             {{ product.content }}
           </p>
         </div>
         <hr>
         <div class="my-3">
-          <!-- 商品介紹 -->
           <div class="d-flex my-4">
             <i class="fs-4 text-primary me-2 bi bi-stars"></i>
             <h2 class="fs-4 my-auto fw-bolder">商品介紹</h2>
           </div>
-          <p class="lh-lg white-space-pre-line">
+          <p class="fs-5 lh-lg white-space-pre-line">
             {{ product.description }}
           </p>
         </div>
         <div class="my-3">
-          <!-- 使用地點 -->
-          <div class="d-flex my-4">
+          <div class="d-flex my-5">
             <i class="fs-4 text-primary me-2 bi bi-stars"></i>
             <h2 class="fs-4 my-auto fw-bolder">使用地點</h2>
           </div>
@@ -122,12 +119,11 @@
         </div>
         <hr>
         <div class="bg-light mt-4 px-3 px-xl-5 py-4 rounded-5">
-          <!-- 注意事項 -->
           <div class="d-flex my-xl-4">
             <i class="fs-5 text-gray me-2 bi bi-pin-fill"></i>
             <h2 class="fs-5 my-auto">注意事項</h2>
           </div>
-          <ul class="lh-lg white-space-pre-line">
+          <ul class="fs-5 lh-lg white-space-pre-line">
             ‧若購買商品為票券時
             <li>請於進入園區時，使用入口處的自動驗票閘門掃描您的QR code，以完成入園手續。</li>
             <li>
@@ -146,22 +142,24 @@
         </div>
       </div>
       <div class="col-12 col-xl-4 my-3 mt-xl-3">
-        <!-- 金額及加入購物車 -->
         <div class="card position-sticky shadow-sm p-5" style="top: 5rem;">
           <div class="mb-3 text-end">
-              <span><del> NT${{ product.origin_price }} </del></span>
-              <span class="fs-3"> NT${{ product.price }}元 </span>
-              <span> /{{ product.unit }} </span>
+            <span><del> NT${{ formatPrice(product.origin_price) }}元/{{ product.unit }} </del></span>
+            <span class="fs-3 d-flex flex-nowrap justify-content-end">
+              NT${{ formatPrice(product.price) }}元/{{ product.unit }}
+            </span>
           </div>
           <div class="input-group mb-3 border mt-3">
             <input class="form-control border-0 text-center my-auto shadow-none"
-              type="number" :min="1" value="1" v-model="prodctQty">
+              type="number" :min="1" value="1"
+              oninput="value=value.replace(/[^\d]/g,'')" v-model="prodctQty">
           </div>
-          <div class="d-flex justify-content-end mt-xl-3">
-            <a href="#" class="btn btn-primary btn-block text-white rounded-0 py-2 ms-2"
-              @click.prevent="addToCart(product,prodctQty)">加入購物車
+          <div class="d-flex flex-column flex-xxl-row justify-content-xxl-end mt-xl-3">
+            <a href="#" class="btn btn-primary btn-block text-white rounded-0 py-2 ms-xxl-2"
+              @click.prevent="addToCart(product,prodctQty)">
+              加入購物車
             </a>
-            <a href="#" class="btn btn-primary btn-block text-white rounded-0 py-2 ms-2"
+            <a href="#" class="btn btn-primary btn-block text-white rounded-0 py-2 mt-3 mt-xxl-0 ms-xxl-2"
               @click.prevent="toOrder(product,prodctQty)">
               立即訂購
             </a>
@@ -169,41 +167,62 @@
         </div>
       </div>
     </section>
-    <section class="row mt-5" data-aos="fade-up">
-      <!-- 推薦商品 -->
+    <section class="row px-3 mt-5" data-aos="fade-up">
       <div class="d-flex my-4">
         <i class="fs-4 text-primary me-2 bi bi-stars"></i>
         <h2 class="fs-4 my-auto fw-bolder">其他推薦商品</h2>
       </div>
-      <div class="col-md-4 col-sm-6" v-for="product in randomProducts" :key="product.id">
-        <RouterLink class="text-decoration-none" :to=" `/product/${product.id}`">
-          <div class="card h-100 mb-4 border-0 shadow-sm product-card-hover">
-            <div style="position: relative;">
-              <div>
-                <span class="fs-5 text-dark bg-white ps-2 opacity-75"
-                  style="position: absolute; top: 15px; z-index: 2;">
-                  <i class="bi bi-geo-alt-fill"></i>
-                  {{ product.nation }}{{ product.area }}
+      <swiper
+        :pagination="{
+          clickable: true,
+        }"
+        :breakpoints="{
+          '640': {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          '768': {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+          '1024': {
+            slidesPerView: 3,
+            spaceBetween: 50,
+          },
+        }"
+        :modules="modules"
+        class="mySwiper"
+      >
+        <swiper-slide class="py-5" v-for="product in randomProducts" :key="product.id">
+          <RouterLink class="text-decoration-none" :to=" `/product/${product.id}`">
+            <div class="card h-100 mb-4 border-0 shadow-sm product-card-hover">
+              <div style="position: relative;">
+                <div>
+                  <span class="fs-5 text-dark bg-white ps-2 opacity-75"
+                    style="position: absolute; top: 15px; z-index: 2;">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    {{ product.nation }}{{ product.area }}
+                  </span>
+                  <img :src="product.imagesUrl[0]" style="height: 200px; z-index: 1;"
+                  class="card-img-top object-fit-cover" alt="product-img">
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="fs-5 text-primary">
+                  <i class="bi bi-play-fill"></i>
+                  {{ product.category }}
                 </span>
-                <img :src="product.imagesUrl[0]" style="height: 200px; z-index: 1;"
-                class="card-img-top object-fit-cover" alt="product-img">
+                <h4 class="card-text text-dark my-2">{{ product.title }}</h4>
+                <p>{{ product.feature }}</p>
+                <p class="fs-5 text-primary fw-bolder">
+                  <del style="color: rgb(196, 196, 196);"> NT${{ formatPrice(product.origin_price) }}</del><br>
+                  NT${{ formatPrice(product.price) }}
+                </p>
               </div>
             </div>
-            <div class="card-body">
-              <span class="fs-5 text-primary">
-                <i class="bi bi-play-fill"></i>
-                {{ product.category }}
-              </span>
-              <h4 class="card-text text-dark my-2 link-hover">{{ product.title }}</h4>
-              <p>{{ product.feature }}</p>
-              <p class="fs-5 text-primary fw-bolder">
-                <del style="color: rgb(196, 196, 196);"> NT${{ product.origin_price }}</del><br>
-                NT${{ product.price }}
-              </p>
-            </div>
-          </div>
-        </RouterLink>
-      </div>
+          </RouterLink>
+        </swiper-slide>
+      </swiper>
     </section>
   </main>
 </template>
@@ -213,21 +232,17 @@ import { mapActions, mapState } from 'pinia'
 import productStore from '@/stores/productStore'
 import cartStore from '@/stores/cartStore'
 
-// loading
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
-
-// Import Swiper styles
 import 'swiper/css'
-
+import 'swiper/css/pagination'
 import 'swiper/css/effect-fade'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
-
-import { EffectFade, FreeMode, Navigation, Thumbs } from 'swiper/modules'
+import { EffectFade, FreeMode, Navigation, Thumbs, Pagination } from 'swiper/modules'
 
 export default {
   data () {
@@ -235,7 +250,7 @@ export default {
       prodctQty: 1,
       dataLoaded: false,
       thumbsSwiper: null,
-      modules: [EffectFade, FreeMode, Navigation, Thumbs]
+      modules: [EffectFade, FreeMode, Navigation, Thumbs, Pagination]
     }
   },
   computed: {
@@ -246,15 +261,13 @@ export default {
       return ['Slide 1', 'Slide 2', 'Slide 3']
     },
     randomProducts () {
-      if (!this.dataLoaded) return [] // 如果資料還未加載完畢，返回空陣列
+      if (!this.dataLoaded) return []
       const shuffledProducts = JSON.parse(JSON.stringify(this.products))
-      // 使用 Fisher-Yates 洗牌算法
       for (let i = shuffledProducts.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledProducts[i], shuffledProducts[j]] = [shuffledProducts[j], shuffledProducts[i]]
       }
-      // 取前三個商品
-      return shuffledProducts.slice(0, 3)
+      return shuffledProducts.slice(0, 5)
     }
   },
   methods: {
@@ -262,11 +275,12 @@ export default {
     ...mapActions(cartStore, ['updateQty']),
     ...mapActions(productStore, ['getAllProductsList']),
     ...mapActions(productStore, ['getProductList']),
+    ...mapActions(productStore, ['formatPrice']),
     setThumbsSwiper (swiper) {
       this.thumbsSwiper = swiper
     },
-    toOrder (product, prodctQty) {
-      this.addToCart(product, prodctQty)
+    async toOrder (product, prodctQty) {
+      await this.addToCart(product, prodctQty)
       this.$router.push('/cart')
     }
   },
@@ -274,6 +288,17 @@ export default {
     Swiper,
     SwiperSlide,
     Loading
+  },
+  watch: {
+    $route () {
+      if (this.$route.params.id != null) {
+        window.scrollTo(0, 0)
+        const { id } = this.$route.params
+        this.getAllProductsList()
+        this.getProductList(id)
+        this.dataLoaded = true
+      }
+    }
   },
   mounted () {
     const { id } = this.$route.params
@@ -286,28 +311,28 @@ export default {
 
 <style scoped>
 .product-first-swiper {
-  height: 700px;
-  @media (max-width: 576px) {
-    height: 160px;
+  height: 800px;
+  @media (max-width: 768px) {
+    height: 200px;
   }
   @media (min-width: 768px) {
-    height: 320px;
+    height: 360px;
   }
   @media (min-width: 992px) {
-    height: 660px;
+    height: 780px;
   }
 }
 
 .product-second-swiper {
   height: 140px;
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     height: 40px;
   }
   @media (min-width: 768px) {
     height: 56px;
   }
   @media (min-width: 992px) {
-    height: 180px;
+    height: 140px;
   }
 }
 .swiper-img-container {

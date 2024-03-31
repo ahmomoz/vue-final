@@ -1,65 +1,66 @@
 <template>
-    <div id="app">
-      <div class="card my-1 my-lg-4 shadow-sm">
-        <div class="card-header">
-          <div class="text-end py-2">
-              <router-link class="btn btn-primary text-light ms-2"
-                  :to="'coupon/add'">
-                  <span class="bi bi-plus"></span>
-                  建立優惠券
-            </router-link>
-          </div>
-        </div>
-        <div class="card-body">
-          <table class="table table-hover">
-              <thead class="bg-light">
-              <tr class="align-middle">
-                  <th @click="sortBy='create_at'">折扣碼</th>
-                  <th>名稱</th>
-                  <th>折扣數</th>
-                  <th>狀態</th>
-                  <th>到期時間</th>
-                  <th>操作</th>
-              </tr>
-              </thead>
-              <!--not sort-->
-              <tbody v-if="sortBy==='default'">
-              <loading v-if="isLoading" :active="isLoading" :can-cancel="false"/>
-              <tr v-for="coupon in coupons" :key="coupon.id">
-                  <td> {{ coupon.code }} </td>
-                  <td> {{ coupon.title }} </td>
-                  <td> {{ 100-coupon.percent }}%</td>
-                  <td>
-                  <span class="text-primary" v-if="coupon.is_enabled">已啟用</span>
-                  <span v-else>未啟用</span>
-                  </td>
-                  <td> {{ formatDateString(coupon.due_date) }} </td>
-                  <td>
-                  <div class="btn-group">
-                    <router-link class="btn btn-outline-primary btn-sm"
-                    :to="{ name: '優惠券單一編輯頁面',
-                    params: { id: coupon.id }, query: { currentPage: pagination.current_page } }">詳細</router-link>
-                    <button type="button" class="btn btn-outline-danger btn-sm" @click="deleteCoupon(coupon.title,coupon.id)">
-                      刪除
-                    </button>
-                  </div>
-                  </td>
-              </tr>
-              </tbody>
-          </table>
-        </div>
-        <div class="card-footer d-flex justify-content-center">
-          <card-pagination :pagination="pagination" @emit-getlist="getCouponList"></card-pagination>
+  <div id="app">
+    <div class="card my-1 my-lg-4 shadow-sm">
+      <div class="card-header">
+        <div class="text-end py-2">
+          <router-link class="btn btn-primary text-light ms-2"
+            :to="'coupon/add'">
+            <span class="bi bi-plus"></span>
+            建立優惠券
+          </router-link>
         </div>
       </div>
+      <div class="card-body">
+        <table class="table table-hover">
+          <thead class="bg-light">
+            <tr class="align-middle">
+              <th @click="sortBy='create_at'">折扣碼</th>
+              <th>名稱</th>
+              <th>折扣數</th>
+              <th>狀態</th>
+              <th>到期時間</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+
+          <!--not sort-->
+          <tbody v-if="sortBy==='default'">
+          <loading v-if="isLoading" :active="isLoading" :can-cancel="false"/>
+          <tr v-for="coupon in coupons" :key="coupon.id">
+            <td> {{ coupon.code }} </td>
+            <td> {{ coupon.title }} </td>
+            <td> {{ 100-coupon.percent }}%</td>
+            <td>
+            <span class="text-primary" v-if="coupon.is_enabled">已啟用</span>
+            <span v-else>未啟用</span>
+            </td>
+            <td> {{ formatDateString(coupon.due_date) }} </td>
+            <td>
+            <div class="btn-group">
+              <router-link class="btn btn-outline-primary btn-sm"
+                :to="{ name: '優惠券單一編輯頁面',
+                params: { id: coupon.id }, query: { currentPage: pagination.current_page } }">詳細</router-link>
+              <button type="button" class="btn btn-outline-danger btn-sm" @click="deleteCoupon(coupon.title,coupon.id)">
+                刪除
+              </button>
+            </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer d-flex justify-content-center">
+        <CardPagination :pagination="pagination" @emit-getlist="getCouponList" />
+      </div>
     </div>
-  </template>
+  </div>
+</template>
 
 <script>
-import CardPagination from '@/components/CardPagination.vue' // 分頁元件
+import CardPagination from '@/components/CardPagination.vue'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
-import moment from 'moment' // 日期轉換套件
+import moment from 'moment'
 const { VITE_API_URL, VITE_APIPATH } = import.meta.env
 
 export default {
@@ -70,11 +71,11 @@ export default {
       allCoupons: [],
       coupons: [],
       pagination: {},
-      isLoading: true // Loading效果
+      isLoading: true
     }
   },
   methods: {
-    getCouponList (page = 1) { // 取得優惠券資料
+    getCouponList (page = 1) {
       this.isLoading = true
       this.$axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/admin/coupons?page=${page}`)
         .then(res => {
@@ -114,7 +115,7 @@ export default {
                 showConfirmButton: false,
                 timer: 700
               })
-              this.getCouponList() // 重新取得優惠券列表
+              this.getCouponList()
             })
             .catch(err => {
               this.$Swal.fire({

@@ -8,7 +8,6 @@
         <img class="img-fluid" src="@/assets/images/cart-step/step1.png" alt="step-img">
       </div>
       <div class="card" v-if="cartList.length>0" data-aos="fade-up">
-        <!--購物車-->
         <div class="card-header bg-white d-flex justify-content-between py-4 py-xl-5">
           <h2 class="my-auto">
             <i class="bi bi-cart4 me-2"></i>
@@ -97,7 +96,6 @@
 <script>
 import { mapActions, mapState } from 'pinia'
 import cartStore from '@/stores/cartStore'
-// loading
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 

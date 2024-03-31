@@ -1,7 +1,9 @@
 <template>
   <header class="navbar navbar-dark sticky-top flex-wrap flex-md-nowrap shadow bg-primary">
     <RouterLink to="/dashboard/home" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 ">療遇 - 後台</RouterLink>
-    <button class="navbar-toggler d-md-none me-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler d-md-none me-2 collapsed" type="button"
+      data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
+      aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
   </header>
@@ -61,8 +63,7 @@ export default {
     }
   },
   methods: {
-    checkAdmin () { // 檢驗身分函式
-      // 取得token，檢查是否已有token紀錄
+    checkAdmin () {
       const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/,
         '$1')
       this.$axios.defaults.headers.common.Authorization = `${token}`
@@ -74,16 +75,16 @@ export default {
             })
             .catch(() => {
               this.$Swal.fire('身分驗證錯誤，跳轉至登入頁')
-              this.$router.push('/adminLogin') // 跳轉至登入頁
+              this.$router.push('/adminLogin')
             })
         } else {
-          this.$router.push('/dashboard') // 有token自動跳轉
+          this.$router.push('/dashboard')
         }
       } else {
         this.$router.push('/adminLogin')
       }
     },
-    signOut () { // 登出函式
+    signOut () {
       this.$Swal.fire('已登出')
       document.cookie = 'hexToken=;expires=;'
       this.$router.push('/adminLogin')

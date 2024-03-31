@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import router from '@/router'
-// loading
+
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 
@@ -15,8 +15,8 @@ export default defineStore('cartStore', {
     total: 0,
     cartList: {},
     cartListTotalQty: '',
-    isLoading: true, // Loading效果
-    form: { // 送出訂單資訊用表格資料
+    isLoading: true,
+    form: {
       user: {
         email: '',
         name: '',
@@ -29,7 +29,7 @@ export default defineStore('cartStore', {
     orderID: ''
   }),
   actions: {
-    getCartList () { // 取得購物車產品資料
+    getCartList () {
       this.isLoading = true
       axios.get(`${VITE_API_URL}/api/${VITE_APIPATH}/cart`)
         .then(res => {
@@ -49,34 +49,38 @@ export default defineStore('cartStore', {
           this.isLoading = false
         })
     },
-    addToCart (product, productQty) { // 加入購物車
-      this.isLoading = true
-      const item = {
-        data: {
-          product_id: product.id,
-          qty: productQty
+    addToCart (product, productQty) {
+      return new Promise((resolve, reject) => {
+        this.isLoading = true
+        const item = {
+          data: {
+            product_id: product.id,
+            qty: productQty
+          }
         }
-      }
-      axios.post(`${VITE_API_URL}/api/${VITE_APIPATH}/cart`, item)
-        .then(res => {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: '成功加入購物車',
-            showConfirmButton: false,
-            timer: 700
+        axios.post(`${VITE_API_URL}/api/${VITE_APIPATH}/cart`, item)
+          .then(res => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: '成功加入購物車',
+              showConfirmButton: false,
+              timer: 700
+            })
+            this.getCartList()
+            resolve() // Resolve Promise when successful
           })
-          this.getCartList()
-        })
-        .catch(err => {
-          Swal.fire({
-            icon: 'error',
-            title: err.response
+          .catch(err => {
+            Swal.fire({
+              icon: 'error',
+              title: err.response
+            })
+            reject(err) // Reject Promise when there's an error
           })
-        })
-        .finally(() => {
-          this.isLoading = false
-        })
+          .finally(() => {
+            this.isLoading = false
+          })
+      })
     },
     useCoupon (coupon) {
       this.isLoading = true
@@ -99,7 +103,7 @@ export default defineStore('cartStore', {
           this.isLoading = false
         })
     },
-    updateQty (product, event) { // 更新商品數量
+    updateQty (product, event) {
       this.isLoading = true
       const newQty = parseInt(event.target.value, 10)
       const item = {
@@ -122,7 +126,7 @@ export default defineStore('cartStore', {
           this.isLoading = false
         })
     },
-    deleteProduct (product) { // 刪除某項產品
+    deleteProduct (product) {
       this.isLoading = true
       axios.delete(`${VITE_API_URL}/api/${VITE_APIPATH}/cart/${product.id}`)
         .then(res => {
@@ -145,7 +149,7 @@ export default defineStore('cartStore', {
           this.isLoading = false
         })
     },
-    deleteCart () { // 清空購物車
+    deleteCart () {
       Swal.fire({
         title: '確定要清空購物車嗎？',
         icon: 'warning',
@@ -176,7 +180,7 @@ export default defineStore('cartStore', {
         }
       })
     },
-    addOrder (form) { // 送出訂單
+    addOrder (form) {
       const currentTime = new Date()
       const currentTimeString = currentTime.toISOString()
       form.user.date = currentTimeString

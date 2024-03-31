@@ -26,38 +26,38 @@
             <p class="mb-0 h4 fw-bold">NT${{ (total).toFixed(0) }}</p>
           </div>
         </div>
-        <button type="btn" class="btn btn-primary py-3 px-5 w-100 rounded-0"
+        <button type="button" class="btn btn-primary py-3 px-5 w-100 rounded-0"
           @click="addPay(this.$route.params.id)">
           送出結帳
         </button>
       </div>
       <div class="col-md-8 card">
-          <div class="card-header bg-white">
-              <h5 class="my-1">收件人資訊</h5>
+        <div class="card-header bg-white">
+            <h5 class="my-1">收件人資訊</h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="name" class="form-label fw-bold">姓名</label>
+            <p class="fs-5">{{ order.name }}</p>
           </div>
-          <div class="card-body">
-            <div class="mb-3">
-                    <label for="name" class="form-label fw-bold">姓名</label>
-                    <p class="fs-5">{{ order.name }}</p>
-                </div>
-                <div class="mb-3">
-                    <label for="tel" class="form-label fw-bold">電話</label>
-                    <p class="fs-5">{{ order.tel }}</p>
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label fw-bold">地址</label>
-                    <p class="fs-5">{{ order.address }}</p>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label fw-bold">E-mail</label>
-                    <p class="fs-5">{{ order.email }}</p>
-                </div>
-                <div class="mb-3">
-                    <label for="message" class="form-label fw-bold">備註</label>
-                    <p class="fs-5" v-if="order.message">{{ order.message }}</p>
-                    <p class="fs-5" v-else>無填寫備註</p>
-                </div>
+          <div class="mb-3">
+            <label for="tel" class="form-label fw-bold">電話</label>
+            <p class="fs-5">{{ order.tel }}</p>
           </div>
+          <div class="mb-3">
+            <label for="address" class="form-label fw-bold">地址</label>
+            <p class="fs-5">{{ order.address }}</p>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label fw-bold">E-mail</label>
+            <p class="fs-5">{{ order.email }}</p>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label fw-bold">備註</label>
+            <p class="fs-5" v-if="order.message">{{ order.message }}</p>
+            <p class="fs-5" v-else>無填寫備註</p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="d-flex justify-content-end my-4">
@@ -72,7 +72,6 @@
 <script>
 import { mapState } from 'pinia'
 import cartStore from '@/stores/cartStore'
-// loading
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 const { VITE_API_URL, VITE_APIPATH } = import.meta.env
@@ -84,7 +83,7 @@ export default {
       orderList: [],
       total: 0,
       final_total: 0,
-      isLoading: true // Loading效果
+      isLoading: true
     }
   },
   computed: {
@@ -105,7 +104,7 @@ export default {
             icon: 'error',
             title: '查不到此訂單，將跳轉回購物車'
           })
-          // this.$router.push('/cart')
+          this.$router.push('/cart')
         })
         .finally(() => {
           this.isLoading = false
@@ -145,5 +144,5 @@ export default {
 }
 </script>
 
-  <style scoped>
-  </style>
+<style scoped>
+</style>

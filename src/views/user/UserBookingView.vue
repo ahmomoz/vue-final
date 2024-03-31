@@ -45,34 +45,32 @@
         <h2 class="mb-3">填寫訂購人資料</h2>
         <VeeForm ref="form" v-slot="{ errors }" @submit="''">
           <div class="mb-3">
-              <label for="email" class="form-label">*Email</label>
-              <VeeField id="email" name="email" type="email" class="form-control"
+            <label for="email" class="form-label">*Email</label>
+            <VeeField id="email" name="email" type="email" class="form-control"
               :class="{ 'is-invalid': errors['email'] }"
-              placeholder="請輸入 Email" rules="email|required" v-model="form.user.email"
-              ></VeeField>
-              <error-message name="email" class="invalid-feedback"></error-message>
+              placeholder="請輸入 Email" rules="email|required" v-model="form.user.email" />
+            <error-message name="email" class="invalid-feedback" />
           </div>
           <div class="mb-3">
-              <label for="name" class="form-label">*收件人姓名</label>
-              <VeeField id="name" name="姓名" type="text" class="form-control"
+            <label for="name" class="form-label">*收件人姓名</label>
+            <VeeField id="name" name="姓名" type="text" class="form-control"
               :class="{ 'is-invalid': errors['姓名'] }"
-              placeholder="請輸入姓名" rules="required" v-model="form.user.name"></VeeField>
-              <error-message name="姓名" class="invalid-feedback"></error-message>
+              placeholder="請輸入姓名" rules="required" v-model="form.user.name" />
+            <error-message name="姓名" class="invalid-feedback" />
           </div>
           <div class="mb-3">
-              <label for="tel" class="form-label">*收件人電話</label>
-              <VeeField id="tel" name="電話" type="text" class="form-control"
+            <label for="tel" class="form-label">*收件人電話</label>
+            <VeeField id="tel" name="電話" type="text" class="form-control"
               :class="{ 'is-invalid': errors['電話'] }"
-              placeholder="請輸入電話" rules="required|min:8|max:10" v-model="form.user.tel"></VeeField>
-              <error-message name="電話" class="invalid-feedback"></error-message>
+              placeholder="請輸入電話" rules="required|min:8|max:10" v-model="form.user.tel" />
+            <error-message name="電話" class="invalid-feedback" />
           </div>
           <div class="mb-3">
             <label for="address" class="form-label">*收件人地址</label>
             <VeeField id="address" name="地址" type="text" class="form-control"
               :class="{ 'is-invalid': errors['地址'] }"
-              placeholder="請輸入地址" rules="required" v-model="form.user.address">
-            </VeeField>
-            <error-message name="地址" class="invalid-feedback"></error-message>
+              placeholder="請輸入地址" rules="required" v-model="form.user.address" />
+            <error-message name="地址" class="invalid-feedback" />
           </div>
           <div class="mb-3">
             <label for="message" class="form-label">留言</label>
@@ -95,14 +93,14 @@
       </div>
     </div>
     <div class="py-5" v-else>
-        <h2 class="text-center">目前購物車無任何商品Q_Q<br>趕快來去選購吧</h2>
-      </div>
-      <div class="d-flex justify-content-end my-4">
-        <RouterLink to="/products" class="fs-5 text-decoration-none link-hover">
-          繼續購物
-          <i class="bi bi-chevron-double-right"></i>
-        </RouterLink>
-      </div>
+      <h2 class="text-center">目前購物車無任何商品Q_Q<br>趕快來去選購吧</h2>
+    </div>
+    <div class="d-flex justify-content-end my-4">
+      <RouterLink to="/products" class="fs-5 text-decoration-none link-hover">
+        繼續購物
+        <i class="bi bi-chevron-double-right"></i>
+      </RouterLink>
+    </div>
   </main>
 </template>
 

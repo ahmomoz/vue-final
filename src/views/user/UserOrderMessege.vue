@@ -14,15 +14,19 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'pinia'
+import cartStore from '@/stores/cartStore'
+
 export default {
-  data () {
-    return {
-      isLoading: true // Loading效果
-    }
+  computed: {
+    ...mapState(cartStore, ['cart']),
+    ...mapState(cartStore, ['cartList'])
   },
   methods: {
+    ...mapActions(cartStore, ['getCartList'])
   },
   mounted () {
+    this.getCartList()
   }
 }
 </script>

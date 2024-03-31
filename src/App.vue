@@ -13,7 +13,7 @@ export default {
   mounted () {
     AOS.init()
     AOS.init({
-      duration: 1800
+      duration: 1500
     })
   }
 }
