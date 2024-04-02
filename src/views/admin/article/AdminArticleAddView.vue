@@ -72,6 +72,7 @@ import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { ImageInsert } from '@ckeditor/ckeditor5-image'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 const { VITE_API_URL, VITE_APIPATH } = import.meta.env
@@ -84,31 +85,13 @@ export default {
       editor: ClassicEditor,
       editorData: '',
       editorConfig: {
-        toolbar: {
-          items: [
-            'heading',
-            '|',
-            'bold',
-            'italic',
-            'link',
-            'bulletedList',
-            'numberedList',
-            '|',
-            'outdent',
-            'indent',
-            '|',
-            'blockQuote',
-            'insertTable',
-            'mediaEmbed',
-            'undo',
-            'redo'
-          ]
-        },
         dataProcessor: {
           writer: {
             enter: '<br>'
           }
-        }
+        },
+        plugins: [ImageInsert],
+        toolbar: ['insertImage']
       },
       isLoading: true,
       currentDate: new Date()
