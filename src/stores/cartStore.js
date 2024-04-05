@@ -68,14 +68,14 @@ export default defineStore('cartStore', {
               timer: 700
             })
             this.getCartList()
-            resolve() // Resolve Promise when successful
+            resolve()
           })
           .catch(err => {
             Swal.fire({
               icon: 'error',
               title: err.response
             })
-            reject(err) // Reject Promise when there's an error
+            reject(err)
           })
           .finally(() => {
             this.isLoading = false
