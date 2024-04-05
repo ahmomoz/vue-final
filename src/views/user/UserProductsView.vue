@@ -254,6 +254,7 @@ export default {
     return {
       products: [],
       allProducts: [],
+      categoryFilterProducts: [],
       nations: [],
       taiwanAreas: [],
       japanAreas: [],
@@ -346,6 +347,7 @@ export default {
     },
     productAreaFilter () {
       if (this.filterArea.length !== 0) {
+        this.products = this.categoryFilterProducts
         this.products = this.productsAreaFilterResults
       } else {
         this.getProductsList()
@@ -357,6 +359,7 @@ export default {
       this.category = category
       if (this.category) {
         this.products = this.productsCategoryFilterResults
+        this.categoryFilterProducts = this.productsCategoryFilterResults
         this.isLoading = false
       } else {
         this.getProductsList()
