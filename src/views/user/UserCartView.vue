@@ -8,17 +8,17 @@
         <img class="img-fluid" src="@/assets/images/cart-step/step1.png" alt="step-img">
       </div>
       <div class="card" v-if="cartList.length>0" data-aos="fade-up">
-        <div class="card-header bg-white d-flex justify-content-between py-4 py-xl-5">
+        <div class="card-header bg-white d-flex justify-content-between py-3 py-xl-5">
           <h2 class="my-auto">
-            <i class="bi bi-cart4 me-2"></i>
+            <i class="bi bi-cart4 me-xl-2"></i>
             商品購物車
           </h2>
-          <button class="btn btn-outline-danger fs-5" type="button" @click="deleteCart">
+          <button class="btn btn-outline-danger" type="button" @click="deleteCart">
             清空購物車
           </button>
         </div>
-        <div class="card-body p-0 my-5" v-if="cartList.length>0">
-          <table class="table fs-6">
+        <div class="card-body table-responsive p-0 mt-5" v-if="cartList.length>0">
+          <table class="table custom-table fs-6">
             <thead>
               <tr>
                 <th>商品資訊</th>
@@ -34,10 +34,13 @@
                   <img :src="product.product.imagesUrl[0]" alt="product-img" style="width: 80px;">
                   <p class="ms-md-2">{{ product.product.title }}</p>
                 </td>
-                <td>${{ formatPrice(product.product.price) }}</td>
+                <td>
+                  ${{ formatPrice(product.product.price) }}
+                </td>
                 <td style="width: 200px;">
                   <div class="input-group input-group-sm">
-                    <input :min="1" type="number" class="form-control"
+                    <input :min="1" step="1" type="number" class="form-control"
+                      oninput="value=value.replace(/[^\d]/g,'')"
                       :value="product.qty"
                       @blur="updateQty(product, $event)">
                     <span class="input-group-text" id="basic-addon2">
@@ -45,7 +48,9 @@
                     </span>
                   </div>
                 </td>
-                <td class="text-end">${{ formatPrice((product.final_total).toFixed(0)) }}</td>
+                <td class="text-end">
+                  ${{ formatPrice((product.final_total).toFixed(0)) }}
+                </td>
                 <td>
                   <button class="btn btn-sm btn-outline-danger text-end" type="button"
                     @click="deleteProduct(product)">
@@ -55,17 +60,17 @@
               </tr>
             </tbody>
           </table>
-          <div class="input-group ms-auto" style="width: 200px;">
-            <input type="text"
-              class="form-control rounded-0 border-bottom border-top-0 border-start-0 border-end-0 shadow-none"
-              placeholder="輸入折扣碼" aria-label="Recipient's username" aria-describedby="button-addon2"
-              v-model="coupon">
-            <div class="input-group-append">
-              <button class="btn btn-outline-dark border-bottom border-top-0 border-start-0 border-end-0 rounded-0"
-                type="button" id="button-addon2" @click="useCoupon(coupon)">
-                <i class="bi bi-send"></i>
-              </button>
-            </div>
+        </div>
+        <div class="input-group ms-auto mb-5" style="width: 200px;">
+          <input type="text"
+            class="form-control rounded-0 border-bottom border-top-0 border-start-0 border-end-0 shadow-none"
+            placeholder="輸入折扣碼" aria-label="Recipient's username" aria-describedby="button-addon2"
+            v-model="coupon">
+          <div class="input-group-append">
+            <button class="btn btn-outline-dark border-bottom border-top-0 border-start-0 border-end-0 rounded-0"
+              type="button" id="button-addon2" @click="useCoupon(coupon)">
+              <i class="bi bi-send"></i>
+            </button>
           </div>
         </div>
         <div class="card-footer d-flex justify-content-end bg-white py-4">
@@ -132,4 +137,10 @@ export default {
 </script>
 
 <style scoped>
+.custom-table td,
+.custom-table th {
+  @media (max-width: 768px) {
+    padding: 10px 25px;
+  }
+}
 </style>

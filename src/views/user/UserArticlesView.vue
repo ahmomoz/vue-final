@@ -23,7 +23,7 @@
         <template v-for="article in articles" :key="article.id" >
           <RouterLink class="text-decoration-none" :to=" `/article/${article.id}`" exact>
             <li class="list-group-item py-2 border-0 border-bottom article-hover">
-              <span class="lh-lg fs-5 text-gray opacity-75 pe-3">
+              <span class="lh-lg fs-5 text-gray pe-3">
                 {{ formatDateString(article.create_at) }}
               </span>
               <span class="bg-gray lh-lg fs-5 text-light opacity-50 px-2">

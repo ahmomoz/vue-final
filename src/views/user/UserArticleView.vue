@@ -25,7 +25,7 @@
         </span>
       </h2>
       <div class="my-5 my-lg-0">
-        <span class="lh-lg fs-5 text-gray opacity-75 pe-3">
+        <span class="lh-lg fs-5 text-gray pe-3">
           {{ formatDateString(article.create_at) }}
         </span>
         <div class="fs-4 mt-5" v-html="article.content"></div>

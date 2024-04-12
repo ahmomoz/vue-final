@@ -106,74 +106,84 @@
       商品分類
     </h2>
     <div class="row g-3 mt-5" data-aos="fade-up">
-      <router-link class="col-lg-6 col-12 category-hover text-decoration-none bg-light d-flex flex-column"
+      <router-link class="col-lg-6 col-12 text-decoration-none"
         :to="{ name: '產品列表', query: { category: '動物園' }}">
-        <div>
-          <img style="width: 100%;" class="object-fit"
-            src="@/assets/images/image/zoo.jpg" alt="zoo">
-        </div>
-        <div class="text-center py-4 p-lg-5">
-          <h3 class="text-gray fs-2 fw-bolder m-0">動物園</h3>
-          <p class="text-gray fs-4 mt-4 mb-auto">
-            有各式各樣的動物可供觀賞。<br>
-            透過展示動物、舉辦教育活動和培訓，提升對動物保育的認識。</p>
+        <div class="category-hover bg-light h-100">
+          <div>
+            <img style="width: 100%;" class="object-fit"
+              src="@/assets/images/image/zoo.jpg" alt="zoo">
+          </div>
+          <div class="text-center py-4 p-lg-5">
+            <h3 class="text-gray fs-2 fw-bolder m-0">動物園</h3>
+            <p class="text-gray fs-4 mt-4 mb-auto">
+              有各式各樣的動物可供觀賞。<br>
+              透過展示動物、舉辦教育活動和培訓，提升對動物保育的認識。</p>
+          </div>
         </div>
       </router-link>
-      <router-link class="col-lg-6 col-12 category-hover text-decoration-none bg-light d-flex flex-column"
+      <router-link class="col-lg-6 col-12 text-decoration-none"
         :to="{ name: '產品列表', query: { category: '動物聚落' }}">
-        <div>
-          <img style="width: 100%;" class="object-fit"
-            src="@/assets/images/image/settlement.jpg" alt="settlement">
-        </div>
-        <div class="text-center py-4 p-lg-5">
-          <h3 class="text-gray fs-2 fw-bolder m-0">動物村 / 動物聚落</h3>
-          <p class="text-gray fs-4 mt-4 mb-auto">
-            通常以單一動物為主題，提供與動物近距離互動的機會。<br>
-            透過遊覽和互動體驗，讓遊客更深入地了解動物的生活和行為。</p>
+        <div class="category-hover bg-light h-100">
+          <div>
+            <img style="width: 100%;" class="object-fit"
+              src="@/assets/images/image/settlement.jpg" alt="settlement">
+          </div>
+          <div class="text-center py-4 p-lg-5">
+            <h3 class="text-gray fs-2 fw-bolder m-0">動物村 / 動物聚落</h3>
+            <p class="text-gray fs-4 mt-4 mb-auto">
+              通常以單一動物為主題，提供與動物近距離互動的機會。<br>
+              透過遊覽和互動體驗，讓遊客更深入地了解動物的生活和行為。</p>
+          </div>
         </div>
       </router-link>
     </div>
     <div class="row g-2 mt-lg-1">
-      <router-link class="col-lg-4 col-12 category-hover text-decoration-none bg-light d-flex flex-column"
+      <router-link class="col-lg-4 col-12 text-decoration-none"
         :to="{ name: '產品列表', query: { category: '農場' }}">
-        <div>
-          <img style="width: 100%;" class="object-fit"
-            src="@/assets/images/image/animalsfarm.jpg" alt="animals-farm">
-        </div>
-        <div class="text-center py-4 p-lg-5">
-          <h3 class="text-gray fs-2 fw-bolder m-0">動物農場</h3>
-          <p class="text-gray fs-4 mt-4 mb-auto">
-            結合農業和觀光，<br>
-            提供小動物觀賞和參與農業活動的機會。<br>
-            可以體驗農場活動，同時欣賞可愛的小動物。</p>
+        <div class="category-hover bg-light h-100">
+          <div>
+            <img style="width: 100%;" class="object-fit"
+              src="@/assets/images/image/animalsfarm.jpg" alt="animals-farm">
+          </div>
+          <div class="text-center py-4 p-lg-5">
+            <h3 class="text-gray fs-2 fw-bolder m-0">動物農場</h3>
+            <p class="text-gray fs-4 mt-4 mb-auto">
+              結合農業和觀光，<br>
+              提供小動物觀賞和參與農業活動的機會。<br>
+              可以體驗農場活動，同時欣賞可愛的小動物。</p>
+          </div>
         </div>
       </router-link>
-      <router-link class="col-lg-4 col-12 category-hover text-decoration-none bg-light d-flex flex-column"
+      <router-link class="col-lg-4 col-12 text-decoration-none"
         :to="{ name: '產品列表', query: { category: '水族館' }}">
-        <div>
-          <img style="width: 100%;" class="object-fit"
-            src="@/assets/images/image/aquarium.jpg" alt="aquarium">
-        </div>
-        <div class="text-center py-4 p-lg-5">
-          <h3 class="text-gray fs-2 fw-bolder m-0">水族館</h3>
-          <p class="text-gray fs-4 mt-4 mb-auto">
-            專門展示各種水生生物和水域生態的場所。<br>
-            是一個可以了解水生生物、<br>
-            水域生態系統和海洋保護的地方。</p>
+        <div class="category-hover bg-light h-100">
+          <div>
+            <img style="width: 100%;" class="object-fit"
+              src="@/assets/images/image/aquarium.jpg" alt="aquarium">
+          </div>
+          <div class="text-center py-4 p-lg-5">
+            <h3 class="text-gray fs-2 fw-bolder m-0">水族館</h3>
+            <p class="text-gray fs-4 mt-4 mb-auto">
+              專門展示各種水生生物和水域生態的場所。<br>
+              是一個可以了解水生生物、<br>
+              水域生態系統和海洋保護的地方。</p>
+          </div>
         </div>
       </router-link>
-      <router-link class="col-lg-4 col-12 category-hover text-decoration-none bg-light d-flex flex-column"
+      <router-link class="col-lg-4 col-12 text-decoration-none"
         :to="{ name: '產品列表', query: { category: '鳥園' }}">
-        <div>
-          <img style="width: 100%;" class="object-fit"
-            src="@/assets/images/image/birdpark.jpg" alt="bird-park">
-        </div>
-        <div class="text-center py-4 p-lg-5">
-          <h3 class="text-gray fs-2 fw-bolder m-0">鳥園</h3>
-          <p class="text-gray fs-4 mt-4 mb-auto">
-            專門保護、展示各種鳥類的場所。<br>
-            可以在這裡近距離觀察各種鳥類，<br>
-            了解它們的生活習性。</p>
+        <div class="category-hover bg-light h-100">
+          <div>
+            <img style="width: 100%;" class="object-fit"
+              src="@/assets/images/image/birdpark.jpg" alt="bird-park">
+          </div>
+          <div class="text-center py-4 p-lg-5">
+            <h3 class="text-gray fs-2 fw-bolder m-0">鳥園</h3>
+            <p class="text-gray fs-4 mt-4 mb-auto">
+              專門保護、展示各種鳥類的場所。<br>
+              可以在這裡近距離觀察各種鳥類，<br>
+              了解它們的生活習性。</p>
+          </div>
         </div>
       </router-link>
     </div>
@@ -204,7 +214,7 @@
               <h4 class="card-text text-dark my-2">{{ product.title }}</h4>
               <p>{{ product.feature }}</p>
               <p class="fs-5 text-primary fw-bolder">
-                <del style="color: rgb(196, 196, 196);">NT${{ formatPrice(product.origin_price) }}</del><br>
+                <del style="color: rgb(108, 105, 105);">NT${{ formatPrice(product.origin_price) }}</del><br>
                 NT${{ formatPrice(product.price) }}
               </p>
             </div>

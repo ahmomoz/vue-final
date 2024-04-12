@@ -9,22 +9,22 @@
       <div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item mx-3">
-            <RouterLink to="/" class="nav-link link-hover text-gray fs-5" exact>
+            <RouterLink to="/" class="nav-link link-hover text-dark fs-5" exact>
               首頁
             </RouterLink>
           </li>
           <li class="nav-item mx-3">
-            <RouterLink to="/articles" class="nav-link link-hover fs-5 header-nav-link">
+            <RouterLink to="/articles" class="nav-link link-hover text-dark fs-5 header-nav-link">
               最新消息
             </RouterLink>
           </li>
           <li class="nav-item mx-3">
-            <RouterLink to="/products" class="nav-link link-hover fs-5 header-nav-link">
+            <RouterLink to="/products" class="nav-link link-hover text-dark fs-5 header-nav-link">
               商品列表
             </RouterLink>
           </li>
           <li class="nav-item mx-3">
-            <RouterLink to="/cart" class="nav-link link-hover fs-5 header-nav-link">
+            <RouterLink to="/cart" class="nav-link link-hover text-dark fs-5 header-nav-link">
               購物車
               <span class="text-primary">
                 ({{ cartListTotalQty!==0 ?  cartListTotalQty : '0' }})
@@ -39,7 +39,7 @@
   <footer class="pt-8 pb-5 bg-light text-primary">
     <ul class="list-unstyled d-lg-flex justify-content-lg-around">
       <li class="p-3 text-center">
-        <RouterLink to="/"><img style="width: 75%;" class="object-fit"
+        <RouterLink to="/"><img style="width: 75%;" class="object-fit footer-link-hover"
           src="@/assets/images/logo/logo.png" alt="logo">
         </RouterLink>
       </li>
@@ -47,23 +47,23 @@
         <p class="h5">聯絡我們</p>
         <p>
           電話 :
-          <a href="tel:(02) 1234-5678">
+          <a href="tel:(02) 1234-5678" class="footer-link-hover">
           (02) 1234-5678
           </a><br>
           E-mail :
-          <a href="mailto:x5426854268@gmail.com">
+          <a href="mailto:x5426854268@gmail.com" class="footer-link-hover">
           x5426854268@gmail.com
           </a><br>
           MON - FRI : 8:30 am - 17:30 pm
         </p>
         <ul class="list-unstyled d-flex">
-          <li>
+          <li class="footer-link-hover">
             <a class="pe-3 link-primary" href="#"><i class="h2 bi bi-facebook"></i></a>
           </li>
-          <li>
+          <li class="footer-link-hover">
             <a class="pe-3 link-primary" href="#"><i class="h2 bi bi-instagram"></i></a>
           </li>
-          <li>
+          <li class="footer-link-hover">
             <a class="pe-3 link-primary" href="#"><i class="h2 bi bi-envelope"></i></a>
           </li>
         </ul>

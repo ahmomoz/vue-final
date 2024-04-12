@@ -2,7 +2,7 @@
   <loading v-if="isLoading" :active="isLoading" :can-cancel="false">
     <img style="width: 200px;" src="@/assets/images/image/loading-img2.gif" alt="to-top-btn">
   </loading>
-  <header class="container-fluid bg-light pt-6 pb-5 py-xl-8 px-3 px-xl-10">
+  <header class="container-fluid bg-light pt-6 pb-5 py-xl-8 px-3 px-xl-7">
     <nav class="mb-3 mb-xl-5" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -25,48 +25,48 @@
         placeholder="想找些什麼呢？" v-model="searchInput" @keyup.enter="productSearch">
     </div>
   </header>
-  <main class="container-fluid px-xl-10 mt-4 mt-xl-5">
-    <section class="row">
+  <main class="container-fluid mt-4 mt-xl-5 px-xl-7">
+    <section class="d-flex">
       <router-link to="/products"
         class="col nav-link link-hover border text-center shadow-sm py-3 m-2"
         @click="productCategoryFilter('')">
         <p class="fs-xl-3 my-auto"
-          :class="{ 'text-primary' : !$route.query.category }">所有商品</p>
+          :class="{ 'text-hard-blue' : !$route.query.category }">所有商品</p>
       </router-link>
       <router-link :to="{ name: '產品列表', query: { category: '動物園' }}"
         class="col nav-link link-hover border text-center shadow-sm py-3 m-2"
         @click="productCategoryFilter('動物園')">
         <p class="fs-xl-3 my-auto"
-          :class="{ 'text-primary': $route.query.category === '動物園' }">動物園</p>
+          :class="{ 'text-hard-blue': $route.query.category === '動物園' }">動物園</p>
       </router-link>
       <router-link :to="{ name: '產品列表', query: { category: '動物聚落' }}"
         class="col nav-link link-hover border text-center shadow-sm py-3 m-2"
         @click="productCategoryFilter('動物聚落')">
         <p class="fs-xl-3 my-auto"
-          :class="{ 'text-primary': $route.query.category === '動物聚落' }">動物聚落</p>
+          :class="{ 'text-hard-blue': $route.query.category === '動物聚落' }">動物聚落</p>
       </router-link>
       <router-link :to="{ name: '產品列表', query: { category: '農場' }}"
         class="col nav-link link-hover border text-center shadow-sm py-3 m-2"
         @click="productCategoryFilter('農場')">
         <p class="fs-xl-3 my-auto"
-          :class="{ 'text-primary': $route.query.category === '農場' }">動物農場</p>
+          :class="{ 'text-hard-blue': $route.query.category === '農場' }">動物農場</p>
       </router-link>
       <router-link :to="{ name: '產品列表', query: { category: '水族館' }}"
         class="col nav-link link-hover border text-center shadow-sm py-3 m-2"
         @click="productCategoryFilter('水族館')">
         <p class="fs-xl-3 my-auto"
-          :class="{ 'text-primary': $route.query.category === '水族館' }">水族館</p>
+          :class="{ 'text-hard-blue': $route.query.category === '水族館' }">水族館</p>
       </router-link>
       <router-link :to="{ name: '產品列表', query: { category: '鳥園' }}"
         class="col nav-link link-hover border text-center shadow-sm py-3 m-2"
         @click="productCategoryFilter('鳥園')">
         <p class="fs-xl-3 my-auto"
-          :class="{ 'text-primary': $route.query.category === '鳥園' }">鳥園</p>
+          :class="{ 'text-hard-blue': $route.query.category === '鳥園' }">鳥園</p>
       </router-link>
     </section>
     <section class="row my-4 my-xl-5">
-      <nav class="col-xl-3 border d-none d-xl-block">
-        <div class="position-sticky" style="top: 5rem;">
+      <nav class="col-xl-3">
+        <div class="position-sticky border d-none d-xl-block" style="top: 5rem;">
           <div class="p-4">
             <h3 class="fw-500">依地區篩選</h3>
             <h4 class="fw-500 mt-xl-4">台灣</h4>
@@ -175,7 +175,7 @@
                   </h4>
                   <p>{{ product.feature }}</p>
                   <p class="fs-5 text-primary fw-bolder">
-                    <del style="color: rgb(196, 196, 196);">
+                    <del style="color: rgb(108, 105, 105);">
                       NT${{ formatPrice(product.origin_price) }}
                     </del>
                     <br>
@@ -222,7 +222,7 @@
                   </h4>
                   <p>{{ product.feature }}</p>
                   <p class="fs-5 text-primary fw-bolder">
-                    <del style="color: rgb(196, 196, 196);">
+                    <del style="color: rgb(108, 105, 105);">
                       NT${{ formatPrice(product.origin_price) }}
                     </del>
                     <br>
@@ -360,7 +360,9 @@ export default {
       if (this.category) {
         this.products = this.productsCategoryFilterResults
         this.categoryFilterProducts = this.productsCategoryFilterResults
-        this.isLoading = false
+        setTimeout(() => {
+          this.isLoading = false
+        }, 1000)
       } else {
         this.getProductsList()
       }

@@ -155,12 +155,14 @@
               oninput="value=value.replace(/[^\d]/g,'')" v-model="prodctQty">
           </div>
           <div class="d-flex flex-column flex-xxl-row justify-content-xxl-end mt-xl-3">
-            <a href="#" class="btn btn-primary btn-block text-white rounded-0 py-2 ms-xxl-2"
-              @click.prevent="addToCart(product,prodctQty)">
+            <a href="#" class="btn btn-outline-primary btn-block rounded-0 py-2 ms-xxl-2"
+              @click.prevent="addToCart(product,prodctQty)"
+              :class="{ disabled:isAddingToCart }">
               加入購物車
             </a>
             <a href="#" class="btn btn-primary btn-block text-white rounded-0 py-2 mt-3 mt-xxl-0 ms-xxl-2"
-              @click.prevent="toOrder(product,prodctQty)">
+              @click.prevent="toOrder(product,prodctQty)"
+              :class="{ disabled:isAddingToCart }">
               立即訂購
             </a>
           </div>
@@ -177,7 +179,7 @@
           clickable: true,
         }"
         :breakpoints="{
-          '640': {
+          '0': {
             slidesPerView: 1,
             spaceBetween: 20,
           },
@@ -191,11 +193,14 @@
           },
         }"
         :modules="modules"
-        class="mySwiper"
+        :navigation="true"
+        :loop="true"
+        class="mySwiper px-md-6"
+        v-if="randomProducts.length>0"
       >
         <swiper-slide class="py-5" v-for="product in randomProducts" :key="product.id">
           <RouterLink class="text-decoration-none" :to=" `/product/${product.id}`">
-            <div class="card h-100 mb-4 border-0 shadow-sm product-card-hover">
+            <div class="card h-100 mb-4 border-1 shadow-sm product-card-hover">
               <div style="position: relative;">
                 <div>
                   <span class="fs-5 text-dark bg-white ps-2 opacity-75"
@@ -257,6 +262,7 @@ export default {
     ...mapState(productStore, ['products']),
     ...mapState(productStore, ['product']),
     ...mapState(productStore, ['isLoading']),
+    ...mapState(cartStore, ['isAddingToCart']),
     items () {
       return ['Slide 1', 'Slide 2', 'Slide 3']
     },

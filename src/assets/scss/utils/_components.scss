@@ -7,7 +7,7 @@
 
 //--home-text-color
 .home-text-color {
-  color: #8bafd7
+  color: #4b7098
 }
 
 //--header-nav-link
@@ -94,10 +94,17 @@
   }
 }
 
+//--footer-link-hover
+.footer-link-hover {
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
 //--article hover
 .article-hover {
   transition: transform 0.3s ease;
-  &:hover{
+  &:hover {
       background: #f1f1f1;
       transform: translateX(30px);
   }

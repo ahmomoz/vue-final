@@ -16,6 +16,7 @@ export default defineStore('cartStore', {
     cartList: {},
     cartListTotalQty: '',
     isLoading: true,
+    isAddingToCart: false,
     form: {
       user: {
         email: '',
@@ -50,7 +51,11 @@ export default defineStore('cartStore', {
         })
     },
     addToCart (product, productQty) {
+      this.isAddingToCart = true
       return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          this.isAddingToCart = false
+        }, 2000)
         this.isLoading = true
         const item = {
           data: {
@@ -106,6 +111,16 @@ export default defineStore('cartStore', {
     updateQty (product, event) {
       this.isLoading = true
       const newQty = parseInt(event.target.value, 10)
+      if (!Number.isInteger(newQty) || newQty < 1) {
+        event.target.value = 1
+        Swal.fire({
+          icon: 'error',
+          title: '請輸入有效的數量'
+        })
+        this.getCartList()
+        this.isLoading = false
+        return
+      }
       const item = {
         data: {
           product_id: product.id,
@@ -115,6 +130,7 @@ export default defineStore('cartStore', {
       axios.put(`${VITE_API_URL}/api/${VITE_APIPATH}/cart/${product.id}`, item)
         .then(res => {
           this.getCartList()
+          this.coupon = ''
         })
         .catch(err => {
           Swal.fire({
