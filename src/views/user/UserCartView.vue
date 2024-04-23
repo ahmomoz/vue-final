@@ -38,9 +38,10 @@
                   ${{ formatPrice(product.product.price) }}
                 </td>
                 <td style="width: 200px;">
-                  <div class="input-group input-group-sm">
+                  <div class="input-group input-group-sm flex-nowrap">
                     <input :min="1" step="1" type="number" class="form-control"
                       oninput="value=value.replace(/[^\d]/g,'')"
+                      style="width: 50px;"
                       :value="product.qty"
                       @blur="updateQty(product, $event)">
                     <span class="input-group-text" id="basic-addon2">
