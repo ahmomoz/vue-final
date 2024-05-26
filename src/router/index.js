@@ -137,7 +137,7 @@ const router = createRouter({
   linkActiveClass: 'active',
   routes,
   scrollBehavior (to, from, savedPosition) {
-    return { top: 0 } // 返回到顶部
+    return { top: 0 }
   }
 })
 
